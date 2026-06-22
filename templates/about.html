@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+
+     <main class="p-3 p-md-5 m-md-3">
+        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis about-bg" data-aos="fade-left">
+
+        </div>
+        <div class="row mb-2" data-aos="fade-down">
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+                        <h3 class="mb-0">Numbers by Day</h3>
+                        <p class="card-text mb-auto">Where financial precision meets a growing obsession with code, data, and automation.</p>
+                    </div>
+                    <div class="col-6 d-none d-lg-block accountant-bg"></div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-down">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success-emphasis">Design</strong>
+                        <h3 class="mb-0">Code by Night</h3>
+                        <p class="mb-auto">A financial analyst learning to build the systems that once just crunched the numbers for me.</p>
+                    </div>
+                    <div class="col-6 d-none d-lg-block developer-img">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-5">
+            <div class="col-md-8">
+                <article class="blog-post">
+
+                    <h2 data-aos="zoom-in">Professional background</h2>
+                    <p class="note" data-aos="zoom-in">I'm a professional accountant and financial analyst, with experience in financial oversight,
+                        invoice scrutiny, and cost estimation within the real estate development sector. My work
+                        involves close attention to numerical accuracy, contract compliance, and identifying
+                        discrepancies before they become costly problems.</p>
+                    <h2 data-aos="zoom-in">Technical journey so far</h2>
+                    <p class="note" data-aos="zoom-in">Over the past several months, I've been building toward a second skill set in software development
+                        and data analysis. Through Python, I've built a full-stack web application with Flask and
+                        SQLAlchemy, complete with user authentication and a database-driven CRUD system. I've used
+                        web scraping with BeautifulSoup and Selenium to automate real-world tasks — from compiling
+                        a personal movie ranking database using a live API, to auto-generating Spotify playlists from
+                        historical Billboard charts, to building bots that handle gym class bookings and apartment
+                        listing submissions without manual input. On the data side, I've worked extensively with pandas,
+                        NumPy, and visualization libraries like Seaborn and Plotly to clean, explore, and analyze real
+                        datasets — uncovering patterns, handling missing data, and building basic linear regression
+                        models to predict outcomes like pricing trends.</p>
+
+                    <h2 data-aos="zoom-in">Future direction</h2>
+                    <p class="note" data-aos="zoom-in">
+                        Looking ahead, I want to bring these two worlds together — using software development and
+                        data analysis to solve real problems in finance and accounting. One long-term goal is building
+                        a Financial Management Information System (FMIS) that brings more transparency, automation,
+                        and real-time oversight to processes I currently handle manually, like invoice verification
+                        and budget tracking. I'm also increasingly drawn to artificial intelligence — not just using
+                        AI tools, but eventually contributing to how they're built, whether through automation systems,
+                        intelligent data pipelines, or applied machine learning. This portfolio is a running record of
+                        that transition: from analyzing numbers by hand to building the systems that can analyze them for me.                         .
+                    </p>
+                </article>
+                <h2 data-aos="fade-up">Get intouch with me!</h2>
+                <div class="my-5" data-aos="fade-up">
+                  <!-- * * * * * * * * * * * * * * *-->
+                  <!-- * * Simplified SB Contact Form for the Tutorial* *-->
+                  <form
+                    id="contactForm"
+                    name="sentMessage"
+                    action="{{url_for('about')}}"
+                    method="post"
+                  >
+                    <div class="form-floating">
+                      <input
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Enter your name..."
+                        required
+                      />
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="form-floating">
+                      <input
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email..."
+                        required
+                      />
+                      <label for="email">Email address</label>
+                    </div>
+                    <div class="form-floating">
+                      <input
+                        class="form-control"
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="Enter your phone number..."
+                        required
+                      />
+                      <label for="phone">Phone Number</label>
+                    </div>
+                    <div class="form-floating">
+                      <textarea
+                        class="form-control"
+                        id="message"
+                        name="message"
+                        placeholder="Enter your message here..."
+                        required
+                        style="height: 12rem"
+                      ></textarea>
+                      <label for="message">Message</label>
+                    </div>
+                    <br />
+                    <button
+                      class="btn btn-primary text-uppercase"
+                      id="submitButton"
+                      type="submit"
+                    >
+                      Send
+                    </button>
+                  </form>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="p-4 mb-3 bg-body-tertiary rounded">
+                        <h4 class="fst-italic">About</h4>
+                        <p class="mb-0">A portfolio documenting the shift from financial analyst to developer —
+                            built one project, one script, and one dataset at a time</p>
+                    </div>
+                    <div>
+                        <h4 class="fst-italic">Recent posts</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class=" d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                                    <img src="static/assets/img/blog-bg2.png" style="width: 150px; height: 100px;">
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">Endeavor's Blog</h6>
+                                        <small class="text-body-secondary">April, 2026</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                                    <img src="static/assets/img/movies-bg.jpeg" style="width: 100%; height: 100px;">
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">My Top 10 Movies</h6>
+                                        <small class="text-body-secondary">February, 2026</small>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="#">
+                                    <img src="static/assets/img/us-states-bg.jpg" style="width: 100%; height: 100px;">
+                                    <div class="col-lg-8">
+                                        <h6 class="mb-0">US States Game</h6>
+                                        <small class="text-body-secondary">January 13, 2024</small>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

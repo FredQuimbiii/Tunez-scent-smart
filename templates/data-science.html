@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Data Science{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary" data-aos="zoom-in">
+            <div class="col-md-6 p-lg-5 mx-auto my-5">
+                <h1 class="display-3 fw-bold">Data In, Insight Out</h1>
+                <h3 class="fw-normal text-muted mb-3">Wrangling raw CSVs into clean datasets, visualizing trends
+                    across multiple chart types, processing images with NumPy, and predicting prices through linear
+                    regression.</h3>
+            </div>
+            <div class="data-science-img shadow-sm d-none d-md-block">
+                <img src="static/assets/img/data-science-bg.jpg"/>
+            </div>
+            <div class="data-science-img data-science-img-2 shadow-sm d-none d-md-block">
+                <img src="static/assets/img/data-science-bg.jpg"/>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+            <div class="white-bg text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="fade-up">
+                <div class="data-cleaning-bg bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 800px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
+                </div>
+            </div>
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="fade-up">
+                <div class="my-3 p-3">
+                    <h2 class="display-5"><strong>First, Clean the Data</strong></h2>
+                    <p class="lead note">
+                        Before any chart or model means anything, the data has to be trustworthy. Using a century of
+                        Nobel Prize records, this project explores, audits, and cleans a raw dataset — checking what's
+                        missing, what's duplicated, and what needs fixing before any real analysis can begin.
+                    </p>
+                    <ul class="lead note">
+                        <li>Loaded a real-world dataset of <strong>962 Nobel Prize records</strong> using <strong>pandas</strong>, then explored its shape, columns, and structure.</li>
+                        <li>Checked for <strong>duplicate entries</strong> and audited every column for <strong>missing (NaN) values</strong> to understand the data's overall quality.</li>
+                        <li>Identified and substituted <strong>missing birth dates</strong> for laureates with incomplete records, documenting each assumption made.</li>
+                        <li>Used <strong>value_counts()</strong> to uncover patterns, like finding every <strong>repeat Nobel Prize winner</strong> in the dataset's history.</li>
+                        <li>Engineered a new <strong>prize_share percentage column</strong> by parsing and converting string-based fraction data (e.g. "1/2") into usable numeric values.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="plot-graph-bg shadow-sm mx-auto" style="width: 80%; height: 800px; border-radius: 21px 21px 0 0;" data-aos="flip-up"></div>
+            </div>
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="my-3 py-3">
+                    <h2 class="display-5"><strong>Then, Let the Data Speak</strong></h2>
+                    <p class="lead note">
+                        A clean dataset is only half the story — the other half is knowing how to look at it. Across
+                        these projects, I've leaned on visualization to ask better questions before reaching for any
+                        model: what's correlated, what's skewed, where the outliers hide, and what the data actually
+                        looks like once it's no longer just rows and columns. Each chart is chosen for what it can reveal,
+                        not just how it looks.
+                    </p>
+                    <ul class="lead note">
+                        <li>Built <strong>regression plots (regplot)</strong> to visualize the relationship between movie production budgets and worldwide gross, complete with a fitted trend line and confidence interval.</li>
+                        <li>Used <strong>displot with kde</strong> to explore the distribution of housing features like number of rooms, spotting skew and outliers in the data.</li>
+                        <li>Generated a <strong>pairplot</strong> across multiple variables (NOX, RM, LSTAT, DIS, PRICE) to compare every relationship at once and form quick hypotheses before modeling.</li>
+                        <li>Combined scatter and distribution views with <strong>jointplot</strong> to study how pollution levels (NOX) relate to distance from employment centers (DIS).</li>
+                        <li>Mapped <strong>Nobel Prize counts by country</strong> using a Plotly choropleth map, and built a horizontal <strong>bar chart</strong> to rank the top 20 countries by category.</li>
+                        <li>Plotted a <strong>line chart with a rolling average</strong> over scatter data to smooth out yearly noise and reveal the long-term trend in prizes awarded.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="numpy-bg shadow-sm mx-auto" style="width: 80%; height: 800px; border-radius: 21px 21px 0 0;" data-aos="flip-up"></div>
+            </div>
+            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="my-3 py-3">
+                    <h2 class="display-5"><strong>Then, Compute Like an Array</strong></h2>
+                    <p class="lead note">
+                        Underneath every chart and every image is just a grid of numbers — and once you can manipulate
+                        that grid, you can manipulate almost anything. This project explores NumPy's ndarray from the
+                        ground up: building vectors and matrices, understanding their shape and dimensions, and using
+                        them to perform real computation, including treating images themselves as arrays to transform and recolor.
+                    </p>
+                    <ul class="lead note">
+                        <li>Explored <strong>1D, 2D, and N-dimensional arrays</strong>, learning how shape, dimensions, and indexing change as data scales from vectors to tensors.</li>
+                        <li>Practiced <strong>array slicing and generation</strong> with tools like <strong>arange()</strong> and <strong>linspace()</strong> to create and extract subsets of data precisely.</li>
+                        <li>Performed <strong>vector arithmetic</strong> — addition, multiplication, and broadcasting scalars across arrays — to understand how NumPy handles element-wise operations.</li>
+                        <li>Implemented <strong>matrix multiplication</strong> using both <strong>.matmul()</strong> and the <strong>@</strong> operator, verifying results by hand against the standard linear algebra definition.</li>
+                        <li>Treated a <strong>real image as a multi-dimensional array</strong>, applying transformations like rotation and color inversion directly through array operations.</li>
+                        <li>Converted a color image to <strong>grayscale</strong> by normalizing pixel values and applying a weighted RGB-to-luminance formula, then rendered the result with Matplotlib.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="predict-bg shadow-sm mx-auto" style="width: 80%; height: 800px; border-radius: 21px 21px 0 0;" data-aos="flip-up"></div>
+            </div>
+            <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+                <div class="my-3 py-3">
+                    <h2 class="display-5"><strong>Then, Predict the Price</strong></h2>
+                    <p class="lead note">
+                        With the data understood and visualized, the next step is turning it into a working model.
+                        This project builds a multivariable linear regression to predict home prices from thirteen
+                        different features, then goes further than just fitting a model — testing whether transforming
+                        the target variable improves accuracy, sense-checking the coefficients against real-world intuition,
+                        and validating performance on data the model has never seen.
+                    </p>
+                    <ul class="lead note">
+                        <li>Split the dataset into <strong>training and test sets</strong> to evaluate model performance on unseen, out-of-sample data rather than the data it was trained on.</li>
+                        <li>Trained a <strong>multivariable linear regression</strong> using scikit-learn, combining 13 features into a single pricing equation and scoring it with R-squared.</li>
+                        <li>Extracted and interpreted the model's <strong>coefficients</strong>, sense-checking their signs and magnitudes against real-world expectations — like whether more rooms genuinely raises price.</li>
+                        <li>Analyzed <strong>residuals</strong> by plotting predicted values against actual prices to visually assess how well the model's predictions track reality.</li>
+                        <li>Applied a <strong>log transformation</strong> to the target variable to correct skew, then retrained the model and compared the new residual distribution and R-squared against the original.</li>
+                        <li>Used the trained model to <strong>estimate the value of custom properties</strong> by feeding in specific feature values and reversing the log transformation to get a dollar estimate.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
