@@ -535,3 +535,15 @@
     background-repeat: no-repeat;
     min-height: 250px;
 }
+
+.navbar {
+    background-color: #00e5ff !important; /* your cyan color */
+}
+
+.navbar-collapse {
+    background-color: #00e5ff !important;
+}
+
+.navbar .nav-link {
+    color: #000000 !important;
+}
