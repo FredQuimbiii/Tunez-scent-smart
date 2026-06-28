@@ -5,10 +5,10 @@
 {% block content %}
 
     <main>
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary" data-aos="zoom-in">
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center white-bg" data-aos="zoom-in">
             <div class="col-md-6 p-lg-5 mx-auto my-5">
-                <h1 class="display-3 fw-bold">Full Stack Designer & Developer</h1>
-                <h3 class="fw-normal text-muted mb-3">Crafting clean, functional web experiences from front-end to back-end
+                <h1 class="display-7 fw-bold">Full Stack Designer & Developer</h1>
+                <h3 class="fw-normal text-muted mb-3 note">Crafting clean, functional web experiences from front-end to back-end
                     — with a growing focus on data and automation.</h3>
                 <div class="d-flex gap-3 justify-content-center lead fw-normal">
                     <a class="icon-link" href="{{url_for('about')}}">
@@ -28,12 +28,12 @@
             </div>
         </div>
         <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="black-bg text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="fade-up">
+            <div class="black-bg text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="fade-up">
                 <div class="my-3 py-3">
-                    <h2 class="display-5">Off Script</h2>
+                    <h2 class="display-8">Off Script</h2>
                     <p class="lead">Stories I love, things I'm learning, and everything in between.</p>
                 </div>
-                <div class="blog-bg bg-body-tertiary shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
+                <div class="blog-bg bg-body-tertiary shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
                     <a href="https://day-71-starting-files-blog-for-deployment-9s47.onrender.com/"
                        class="btn btn-outline-light stretched-link mt-3">Go There!
                         <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
@@ -41,12 +41,12 @@
                     </a>
                 </div>
             </div>
-            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="fade-up">
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="fade-up">
                 <div class="my-3 p-3">
-                    <h2 class="display-5">Scraped & Sorted</h2>
+                    <h2 class="display-8">Scraped & Sorted</h2>
                     <p class="lead">Movies ranked, playlists built, prices tracked — all pulled straight from the web.</p>
                 </div>
-                <div class="web-bg shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
+                <div class="web-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
                     <a href="{{url_for('web_scraping')}}"
                        class="btn btn-outline-light stretched-link mt-3">Go There!
                         <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
@@ -56,13 +56,13 @@
             </div>
         </div>
         <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="flip-up">
                 <div class="my-3 p-3">
-                    <h2 class="display-5">AI, Meet Interface</h2>
+                    <h2 class="display-7">AI, Meet Interface</h2>
                     <p class="lead">AI bots that book my gym slots and apartments, plus desktop apps for quizzes,
                         passwords, and learning all 50 states.</p>
                 </div>
-                <div class="ai-gui-bg shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
+                <div class="ai-gui-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
                     <a href="{{url_for('ai_gui')}}"
                        class="btn btn-outline-light stretched-link mt-3">Go There!
                         <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
@@ -70,13 +70,13 @@
                     </a>
                 </div>
             </div>
-            <div class="my-navbar me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" data-aos="flip-up">
+            <div class="my-navbar me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="flip-up">
                 <div class="my-3 py-3">
-                    <h2 class="display-5">Numbers, Charts & Predictions</h2>
+                    <h2 class="display-7">Numbers, Charts & Predictions</h2>
                     <p class="lead">The full data science loop — wrangling messy CSVs, visualizing patterns through
                         charts and plots, processing images with NumPy, and predicting prices with regression.</p>
                 </div>
-                <div class="data-science-bg shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
+                <div class="data-science-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
                     <a href="{{url_for('data_science')}}"
                        class="btn btn-outline-light stretched-link mt-3">Go There!
                         <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use

@@ -68,7 +68,7 @@
   width: 20px;
   height: 50px;
   bottom: 0;
-  left: -25%;
+  left: -35%;
   background-color: #e5e5e5;
 }
 
@@ -256,7 +256,7 @@
   width: 20px;
   height: 50px;
   bottom: 0;
-  left: -5%;
+  left: -15%;
   background-color: #e5e5e5;
 }
 
@@ -325,7 +325,7 @@
   width: 20px;
   height: 50px;
   bottom: 0;
-  left: -55%;
+  left: -65%;
   background-color: #e5e5e5;
 }
 
@@ -403,10 +403,12 @@
 
 .data-cleaning-bg{
     background-image: url("../assets/img/data-cleaning-bg.jpg") !important;
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: top;
+    height: 800px;
     background-repeat: no-repeat;
 }
+
 
 .plot-graph-bg{
     background-image: url("../assets/img/plot-graph-bg.jpeg") !important;
@@ -554,3 +556,4 @@
         min-height: 250px;
     }
 }
+
