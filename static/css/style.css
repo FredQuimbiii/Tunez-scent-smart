@@ -755,6 +755,37 @@
     .perfume-home-page .row.mb-2 > [class*="col-md-"] {
         flex: 0 0 100% !important;
         max-width: 100% !important;
+
+     .perfume-home-page .my-3.p-2 {
+        margin: 0.5rem 0 !important;
+        padding: 0.25rem !important;
+    }
+
+    .perfume-home-page h2.display-8 {
+        font-size: 0.95rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .perfume-home-page .lead {
+        font-size: 1rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .perfume-home-page .d-flex.justify-content-center.gap-1.mb-1 {
+        margin-bottom: 0.25rem !important;
+    }
+
+    .perfume-home-page .btn.navbar-tunez-gradient,
+    .perfume-home-page .btn-outline-secondary {
+        padding: 0.4rem 0.6rem !important;
+        margin-top: 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .perfume-home-page .pef-card {
+        height: 180px !important;
+    }
     }
 
     /* Show the Hot Deals / Best Selling product image on small screens too */
