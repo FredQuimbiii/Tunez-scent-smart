@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
+            <h1 class="h2">Checkout form</h1>
+            {% if num_cart and num_cart > 0 %}
+            <p class="lead">Review your order details and choose how you'd like to pay.
+                All fields marked must be completed before you can continue.</p>
+            {% endif %}
+        </div>
+
+        {% if num_cart and num_cart > 0 %}
+        <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill">{{ num_cart }}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    {% for item in range(num_cart) %}
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">{{ cart[item].name }}</h6>
+                            <small class="text-body-secondary">Units x {{ cart[item].unit }}</small>
+                            <a href="{{ url_for('delete_item', pef_id=cart[item].id) }}">✘</a>
+                        </div>
+                        <span class="text-body-secondary">₦{{ cart[item].price| commas }}</span>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong>₦{{ total | commas }}</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <h4 class="mb-3">Billing address</h4>
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            {{ form.first_name.label(class="form-label") }}
+                            {{ form.first_name(class="form-control" + (" is-invalid" if form.first_name.errors else ""))
+                            }}
+                            {% for error in form.first_name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form.last_name.label(class="form-label") }}
+                            {{ form.last_name(class="form-control" + (" is-invalid" if form.last_name.errors else ""))
+                            }}
+                            {% for error in form.last_name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form.contact.label(class="form-label") }}
+                            {{ form.contact(class="form-control" + (" is-invalid" if form.contact.errors else ""),
+                            placeholder="Phone number") }}
+                            {% for error in form.contact.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form.alt_contact.label(class="form-label") }} <span class="text-body-secondary">(Optional)</span>
+                            {{ form.alt_contact(class="form-control" + (" is-invalid" if form.alt_contact.errors else
+                            ""), placeholder="Alternative phone number") }}
+                            {% for error in form.alt_contact.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-12">
+                            {{ form.email.label(class="form-label") }} <span
+                                class="text-body-secondary">(Required)</span>
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""),
+                            placeholder="you@example.com") }}
+                            {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-12">
+                            {{ form.address.label(class="form-label") }}
+                            {{ form.address(class="form-control" + (" is-invalid" if form.address.errors else ""),
+                            placeholder="1234 Main St") }}
+                            {% for error in form.address.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-12">
+                            {{ form.address2.label(class="form-label") }} <span
+                                class="text-body-secondary">(Optional)</span>
+                            {{ form.address2(class="form-control", placeholder="Apartment or suite") }}
+                        </div>
+                        <div class="col-md-5">
+                            {{ form.country.label(class="form-label") }}
+                            {{ form.country(class="form-select" + (" is-invalid" if form.country.errors else "")) }}
+                            {% for error in form.country.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-4">
+                            {{ form.state.label(class="form-label") }}
+                            {{ form.state(class="form-select" + (" is-invalid" if form.state.errors else "")) }}
+                            {% for error in form.state.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-3">
+                            {{ form.zip_code.label(class="form-label") }}
+                            {{ form.zip_code(class="form-control" + (" is-invalid" if form.zip_code.errors else "")) }}
+                            {% for error in form.zip_code.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <h4 class="mb-3">Payment</h4>
+                    <div class="my-3">
+                        {% for subfield in form.payment_method %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input") }}
+                            {{ subfield.label(class="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <hr class="my-4">
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+                 class="bi bi-cart-x text-body-secondary mb-3" viewBox="0 0 16 16">
+                <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793z"/>
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.62A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7H4.415zM6 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <h4 class="text-body-secondary mb-2">Your cart is empty</h4>
+            <p class="text-body-secondary mb-4">You need to add items to your cart before checking out.</p>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Continue shopping</a>
+        </div>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}

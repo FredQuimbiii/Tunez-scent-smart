@@ -1,0 +1,47 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<main class="mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+                <div class="text-center my-4 my-md-5">
+                    <h1 class="h2 fw-bold">Welcome Back!</h1>
+                    <p class="text-body-secondary">Log in to continue to Tunez Scent Mart</p>
+                </div>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="mb-3">
+                    {% for message in messages %}
+                    <div class="alert alert-danger py-2 mb-2" role="alert">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <form method="POST" novalidate>
+                            {{ render_form(form, novalidate=True) }}
+                        </form>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <a href="{{ url_for('forgot_password') }}" class="small text-decoration-none">Forgot password?</a>
+                            <a href="{{ url_for('register') }}" class="small text-decoration-none">Don't have an account? Sign up</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% block footer %}{% endblock %}
+{% endblock %}

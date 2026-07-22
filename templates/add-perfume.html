@@ -1,0 +1,45 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% extends 'base.html' %}
+
+{% block title %}Add Perfume{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<header
+        class="masthead"
+>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    {% if is_edit: %}
+                    <h1>Edit Perfume</h1>
+                    {% else: %}
+                    <h1>New Perfume</h1>
+                    {% endif %}
+                    <span class="subheading display-6"
+                    >Amaze your audience!</span
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ ckeditor.load() }}
+                    {{ ckeditor.config(name='description') }}
+                    {{ render_form(form, novalidate=True) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% block footer %}{% endblock %}
+{% endblock %}

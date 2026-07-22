@@ -176,7 +176,7 @@
 }
 
 .my-navbar {
-  background-color: #35fafd !important;
+  background-color: #91008D !important;
 }
 
 .my-navtext .nav-link{
@@ -514,16 +514,139 @@
     display: block!important
 }
 
-.about-bg{
-    background-image: url("../assets/img/about-me.jpg") !important;
-    background-size: cover;
+.tunez-bg {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ffe0cf, #ffb6c1, #ffffff, #ff9ecb);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.tunez-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%238B2635' stroke-width='1.5' opacity='0.5'%3E%3Cpath d='M60 20 L60 30 M52 30 L68 30 M55 30 L55 45 L65 45 L65 30 M52 45 Q52 60 60 65 Q68 60 68 45' /%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 120px 120px;
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.tunez-logo-img {
+    width: 450px;
+    height: auto;
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.navbar-tunez-gradient {
+    background: linear-gradient(-45deg, #ffe0cf, #ffb6c1, #ffffff, #ff9ecb) !important;
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+}
+
+.navbar {
+    background-color: #FF90FF !important; /* your cyan color */
+}
+
+.navbar-collapse {
+    background-color: #FF90FF !important;
+}
+
+.navbar .nav-link {
+    color: #000000 !important;
+}
+
+@media (max-width: 768px) {
+    .top-pef-bg {
+        background-size: contain;
+        min-height: 250px;
+    }
+
+    /* Force the World/Design row to stay 2-per-row */
+    .row.mb-2 > .col-md-6 {
+        flex: 0 0 48% !important;
+        max-width: 48% !important;
+    }
+
+    /* Force the perfume card wrapper to stay flex + wrap 2-per-row */
+    .d-md-flex.flex-md-equal {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem;
+    }
+    .d-md-flex.flex-md-equal > div {
+        flex: 0 0 48% !important;
+        max-width: 48% !important;
+    }
+
+    /* shrink card content so it doesn't feel cramped */
+    .pef-card {
+        height: 200px;
+    }
+    .my-3.p-5 {
+        padding: 0.75rem !important;
+    }
+    h2.display-8 {
+        font-size: 1rem;
+    }
+}
+
+.pef-card{
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pef-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* adjust to taste, or remove if you already have margin on cards */
+}
+
+.carousel-bg{
+    background-size: contain !important;
     background-position: center;
     background-repeat: no-repeat;
     min-height: 400px;
 }
 
+.golden-bg{
+    background-image: url("../assets/img/golden-sky.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.diamond-bg{
+    background-image: url("../assets/img/golden-bg.gif") !important;
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat;
+}
+
+.top-pef-bg{
+    background-size: cover !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 250px;
+}
+
 .accountant-bg{
-    background-image: url("../assets/img/accountant-img.jpg") !important;
+    background-image: url("../assets/img/uploads/DG.jpg") !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -538,22 +661,209 @@
     min-height: 250px;
 }
 
-.navbar {
-    background-color: #00e5ff !important; /* your cyan color */
+.outlines-bg{
+    background-image: url("../assets/img/euphoria.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    will-change: transform;
+    contain: layout paint;
 }
 
-.navbar-collapse {
-    background-color: #00e5ff !important;
+.pef-price{
+    justify-content: left !important;
 }
 
-.navbar .nav-link {
-    color: #000000 !important;
+.pef-name{
+    justify-content: left !important;
 }
 
-@media (max-width: 768px) {
-    .about-bg {
-        background-size: contain;
-        min-height: 250px;
+.dropdown-color {
+  background-color: #d3d3d3 !important;
+}
+
+.dropdown-menu {
+    background-color: #FF90FF !important;
+    border: 1px solid #999 !important;   /* border color/thickness */
+    border-radius: 6px !important;          /* 0 = square corners, or try 4px for slight rounding */
+    margin-top: 0 !important;             /* removes the gap between navbar and menu */
+    min-width: 180px;                     /* control width */
+    box-shadow: none !important;          /* remove the drop shadow if you want it flatter */
+}
+
+@media (min-width: 768px) {
+    .p-md-2 {
+        padding: 1rem !important;
     }
 }
+
+@media (max-width: 767.98px) {
+    /* Force the carousel + details wrapper to stack — scoped to this page only */
+    .perfume-detail-page .d-md-flex.flex-md-equal {
+        display: block !important;
+    }
+
+    .perfume-detail-page .d-md-flex.flex-md-equal > .outlines-bg {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-right: 0 !important;
+    }
+
+    /* Force Hot Deals / Best Selling row to stack too */
+    .perfume-detail-page .row.mb-2 > [class*="col-md-"] {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Let carousel images breathe instead of fixed 500px height */
+    .perfume-detail-page .carousel-item img,
+    .perfume-detail-page .carousel-item .white-bg {
+        height: 300px !important;
+    }
+
+    /* Show the Hot Deals / Best Selling product image on small screens too */
+    .perfume-detail-page .top-pef-bg {
+    display: block !important;
+    height: 200px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+}
+
+@media (max-width: 767.98px) {
+
+    .perfume-home-page .row.mb-2 > [class*="col-md-"] {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Show the Hot Deals / Best Selling product image on small screens too */
+    .perfume-home-page .top-pef-bg {
+    display: block !important;
+    height: 200px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    }
+
+    .perfume-home-page .pef-card {
+        height: 220px !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /* Trim the extra padding around each card so it doesn't add to the stretch */
+    .perfume-home-page .outlines-bg {
+        padding: 1rem !important;
+    }
+
+    .perfume-home-page .white-bg {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        padding-top: 1rem !important;
+    }
+}
+
+.social-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.social-toggle-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background-color: #d6336c;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.25s ease;
+}
+
+.social-toggle-icon {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.social-toggle-btn.open .social-toggle-icon {
+    transform: rotate(45deg);
+}
+
+.social-float-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.social-float-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0.5) translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.social-float-items.open .social-float-btn {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+}
+
+.social-float-btn.wa { background-color: #25D366; }
+.social-float-btn.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.social-float-btn.tt { background-color: #000; }
+
+.thumb-btn img {
+        border: 2px solid transparent;
+        transition: border-color 0.15s ease;
+    }
+    .thumb-btn.active img {
+        border-color: var(--bs-primary);
+    }
+
+#myCarousel .carousel-inner-pef,
+#myCarousel .carousel-item .carousel-inner-pef{
+    height: 800px;
+}
+
+@media (max-width: 767.98px) {
+    #myCarousel .carousel-inner-pef,
+    #myCarousel .carousel-item .carousel-inner-pef{
+        height: 400px;
+    }
+
+     #myCarousel .carousel-inner-pef,
+      #myCarousel .carousel-item .carousel-inner-pef{
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+    }
+}
+
+
+
 

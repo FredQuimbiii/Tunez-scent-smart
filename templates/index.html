@@ -1,89 +1,274 @@
 {% extends 'base.html' %}
 
-{% block title %}My Avatar{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
+<div class="tunez-bg" data-aos="fade-left">
+    <img src="static/assets/img/tunez-logo-cropped.png" class="tunez-logo-img"
+         data-aos="zoom-in" alt="Tunez Scent Mart">
+</div>
 
-    <main>
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center white-bg" data-aos="zoom-in">
-            <div class="col-md-6 p-lg-5 mx-auto my-5">
-                <h1 class="display-7 fw-bold">Full Stack Designer & Developer</h1>
-                <h3 class="fw-normal text-muted mb-3 note">Crafting clean, functional web experiences from front-end to back-end
-                    — with a growing focus on data and automation.</h3>
-                <div class="d-flex gap-3 justify-content-center lead fw-normal">
-                    <a class="icon-link" href="{{url_for('about')}}">
-                        Learn more
+<main class="p-3 p-md-2 m-md-3 perfume-home-page">
+    {% if num_pef and num_pef > 0 %}
+    <div id="myCarousel" class="carousel slide mb-3" data-bs-ride="carousel" data-aos="zoom-in">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            {% if pef_img|length > 1 %}
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            {% endif %}
+            {% if pef_img|length > 2 %}
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            {% endif %}
+        </div>
+        <div class="diamond-bg carousel-inner">
+            <div class="carousel-item active carousel-bg"
+                 style="background-image: url('{{ pef_img[0] }}');"></div>
+            {% if pef_img|length > 1 %}
+            <div class="carousel-item carousel-bg"
+                 style="background-image: url('{{ pef_img[1] }}');"></div>
+            {% endif %}
+            {% if pef_img|length > 2 %}
+            <div class="carousel-item carousel-bg"
+                 style="background-image: url('{{ pef_img[2] }}');"></div>
+            {% endif %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev"><span
+                class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+                class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next"><span
+                class="carousel-control-next-icon" aria-hidden="true"></span> <span
+                class="visually-hidden">Next</span></button>
+    </div>
+    <div class="row mb-2" data-aos="fade-down">
+        <div class="col-md-6">
+            <a href="{{url_for('show_perfume', pef_id=top_pef[0].id)}}" class="text-decoration-none text-reset">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary-emphasis">Hot Deals Today!</strong>
+                        <h3 class="mb-0">{{ top_pef[0].name }}</h3>
+                        <p class="card-text mb-auto">₦{{ top_pef[0].price | commas }}</p>
+                    </div>
+                    <div class="col-6 d-none d-lg-block top-pef-bg"
+                         style="background-image: url('{{ top_pef[0].image_url }}');"></div>
+                </div>
+            </a>
+        </div>
+        {% if top_pef|length > 1 %}
+        <div class="col-md-6" data-aos="fade-down">
+            <a href="{{url_for('show_perfume', pef_id=top_pef[1].id)}}" class="text-decoration-none text-reset">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success-emphasis">Best Selling!</strong>
+                        <h3 class="mb-0">{{ top_pef[1].name }}</h3>
+                        <p class="mb-auto">₦{{ top_pef[1].price | commas }}</p>
+                    </div>
+                    <div class="col-6 d-none d-lg-block top-pef-bg"
+                         style="background-image: url('{{ top_pef[1].image_url }}');">
 
-                        <svg class="bi" aria-hidden="true">
-                            <use xlink:href="#chevron-right"></use>
-                        </svg>
-                    </a>
+                    </div>
                 </div>
-            </div>
-            <div class="my-dev-image shadow-sm d-none d-md-block">
-                <img src="static/assets/img/dev_image.jpg" data-aos="fade-right"/>
-            </div>
-            <div class="my-dev-image my-dev-image-2 shadow-sm d-none d-md-block">
-                <img src="static/assets/img/dev_image.jpg" data-aos="fade-left"/>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row g-5">
+        <div class="col-md-8">
+            <article class="blog-post">
+                {% set ns = namespace(serv=[], count=0) %}
+                {% for item in range(num_pef) %}
+                {% set ns.count = 0 %}
+                <div class="d-md-flex flex-md-equal">
+                    {% for data in pef %}
+                    {% if ns.count != 2 and data.name not in ns.serv %}
+                    <div class="outlines-bg row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative p-4 me-md-3">
+                        <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column"
+                             data-aos="fade-up">
+                            <div class="pef-card shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius:
+                                            21px 21px 0 0; background-image: url('{{ data.image_url }}');"
+                                 data-aos="fade-up">
+                            </div>
+                            <div class="my-3 p-2">
+                                <h2 class="display-8">{{ data.name }}</h2>
+
+                                {% set r = pef_ratings.get(data.id, {"avg": 0, "count": 0}) %}
+                                <div class="d-flex justify-content-center gap-1 mb-1">
+                                    {% for i in range(1, 6) %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                         class="{{ 'text-warning' if i <= r.avg else 'text-secondary opacity-50' }}"
+                                         viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    {% endfor %}
+                                    <span class="small text-body-secondary ms-1">
+                                        {% if r.count > 0 %}
+                                        {{ "%.1f"|format(r.avg) }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+
+                                <p class="lead">₦{{ data.price | commas}}</p>
+                                {% set ns.serv = ns.serv + [data.name] %}
+                                {% set ns.count = ns.count + 1 %}
+                                {% if data.units > 0 %}
+                                <a href="{{url_for('show_perfume', pef_id=data.id)}}"
+                                   class="btn navbar-tunez-gradient mt-3 w-100">View Product!
+                                    <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
+                                        <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
+                                    </svg>
+                                </a>
+                                {% else %}
+                                    {% if data.units < 1 and u_id == 1 %}
+                                    <a href="{{url_for('show_perfume', pef_id=data.id)}}"
+                                       class="btn btn-outline-secondary mt-3">Out of Stock!
+                                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
+                                            <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
+                                        </svg>
+                                    </a>
+                                    {% else %}
+                                    <button type="button" class="btn btn-outline-secondary mt-3 disabled"
+                                            aria-disabled="true" disabled>
+                                        Out of Stock
+                                    </button>
+                                    {% endif %}
+                                {% endif %}
+                                {% if u_id ==1 %}
+                                <a href="{{url_for('delete_perfume', pef_id=data.id) }}">✘</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endfor %}
+
+                {% if pagination and pagination.pages > 1 %}
+                <nav aria-label="Perfume pages">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                            <a class="page-link"
+                               href="{{ url_for('home', page=pagination.prev_num) if pagination.has_prev else '#' }}">Previous</a>
+                        </li>
+                        {% for p in range(1, pagination.pages + 1) %}
+                        <li class="page-item {% if p == pagination.page %}active{% endif %}">
+                            <a class="page-link" href="{{ url_for('home', page=p) }}">{{ p }}</a>
+                        </li>
+                        {% endfor %}
+                        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                            <a class="page-link"
+                               href="{{ url_for('home', page=pagination.next_num) if pagination.has_next else '#' }}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                {% endif %}
+            </article>
+        </div>
+        <div class="col-md-4" data-aos="fade-up">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4 mb-3 golden-bg rounded">
+                    <h4 class="fst-italic">Hope you know!</h4>
+                    <p class="mb-0 note"><strong>{{ quote }}</strong></p>
+                </div>
+                <div>
+                    <h4 class="fst-italic">Recent Orders</h4>
+                    {% if hot_pef|length > 0 %}
+                    <ul class="list-unstyled">
+                        {% if hot_pef|length > 1 %}
+                        <li>
+                            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                               href="{{url_for('show_perfume', pef_id=hot_pef[0].product_id)}}">
+                                <img src="{{ hot_pef[0].image_url }}" style="width: 150px; height: 100px;">
+                                <div class="col-lg-8">
+                                    <h6 class="mb-0">{{ hot_pef[0].name }}</h6>
+                                    <small class="text-body-secondary">₦{{ hot_pef[0].unit_price | commas }}</small>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                               href="{{url_for('show_perfume', pef_id=hot_pef[1].product_id)}}">
+                                <img src="{{ hot_pef[1].image_url }}" style="width: 150px; height: 100px;">
+                                <div class="col-lg-8">
+                                    <h6 class="mb-0">{{ hot_pef[1].name }}</h6>
+                                    <small class="text-body-secondary">₦{{ hot_pef[1].unit_price | commas }}</small>
+                                </div>
+                            </a>
+                        </li>
+                        {% if hot_pef|length > 3 %}
+                        <li>
+                            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                               href="{{url_for('show_perfume', pef_id=hot_pef[2].product_id)}}">
+                                <img src="{{ hot_pef[2].image_url }}" style="width: 150px; height: 100px;">
+                                <div class="col-lg-8">
+                                    <h6 class="mb-0">{{ hot_pef[2].name }}</h6>
+                                    <small class="text-body-secondary">₦{{ hot_pef[2].unit_price | commas }}</small>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if hot_pef|length > 4 %}
+                        <li>
+                            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                               href="{{url_for('show_perfume', pef_id=hot_pef[3].product_id)}}">
+                                <img src="{{ hot_pef[3].image_url }}" style="width: 150px; height: 100px;">
+                                <div class="col-lg-8">
+                                    <h6 class="mb-0">{{ hot_pef[3].name }}</h6>
+                                    <small class="text-body-secondary">₦{{ hot_pef[3].unit_price | commas }}</small>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if hot_pef|length > 5 %}
+                        <li>
+                            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                               href="{{url_for('show_perfume', pef_id=hot_pef[4].product_id)}}">
+                                <img src="{{ hot_pef[4].image_url }}" style="width: 150px; height: 100px;">
+                                <div class="col-lg-8">
+                                    <h6 class="mb-0">{{ hot_pef[4].name }}</h6>
+                                    <small class="text-body-secondary">₦{{ hot_pef[4].unit_price | commas }}</small>
+                                </div>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
         </div>
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="black-bg text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="fade-up">
-                <div class="my-3 py-3">
-                    <h2 class="display-8">Off Script</h2>
-                    <p class="lead">Stories I love, things I'm learning, and everything in between.</p>
-                </div>
-                <div class="blog-bg bg-body-tertiary shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
-                    <a href="https://day-71-starting-files-blog-for-deployment-9s47.onrender.com/"
-                       class="btn btn-outline-light stretched-link mt-3">Go There!
-                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
-                                xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="fade-up">
-                <div class="my-3 p-3">
-                    <h2 class="display-8">Scraped & Sorted</h2>
-                    <p class="lead">Movies ranked, playlists built, prices tracked — all pulled straight from the web.</p>
-                </div>
-                <div class="web-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="fade-up">
-                    <a href="{{url_for('web_scraping')}}"
-                       class="btn btn-outline-light stretched-link mt-3">Go There!
-                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
-                                xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="flip-up">
-                <div class="my-3 p-3">
-                    <h2 class="display-7">AI, Meet Interface</h2>
-                    <p class="lead">AI bots that book my gym slots and apartments, plus desktop apps for quizzes,
-                        passwords, and learning all 50 states.</p>
-                </div>
-                <div class="ai-gui-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
-                    <a href="{{url_for('ai_gui')}}"
-                       class="btn btn-outline-light stretched-link mt-3">Go There!
-                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
-                                xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use></svg>
-                    </a>
-                </div>
-            </div>
-            <div class="my-navbar me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column" data-aos="flip-up">
-                <div class="my-3 py-3">
-                    <h2 class="display-7">Numbers, Charts & Predictions</h2>
-                    <p class="lead">The full data science loop — wrangling messy CSVs, visualizing patterns through
-                        charts and plots, processing images with NumPy, and predicting prices with regression.</p>
-                </div>
-                <div class="data-science-bg shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius: 21px 21px 0 0;" data-aos="flip-up">
-                    <a href="{{url_for('data_science')}}"
-                       class="btn btn-outline-light stretched-link mt-3">Go There!
-                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true"><use
-                                xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+             class="bi bi-shop text-body-secondary mb-3" viewBox="0 0 16 16">
+            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L11.55 2H4.45L1.90 5.045a.5.5 0 0 0-.12.325v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5z"/>
+        </svg>
+
+
+        {% if u_id == 1 and not not_found %}
+        <h4 class="text-body-secondary mb-2">You don't have any perfume in store</h4>
+        <p class="text-body-secondary mb-4">Add your first perfume to get started.</p>
+        <a href="{{ url_for('add_perfume') }}" class="btn btn-primary">Add Perfume</a>
+        {% endif %}
+
+        {% if u_id == 1 and not_found %}
+        <h4 class="text-body-secondary mb-2">Sorry we couldn't find that perfume in store</h4>
+        <p class="text-body-secondary mb-4">Please add to inventory</p>
+        <a href="{{ url_for('add_perfume') }}" class="btn btn-primary">Add Perfume</a>
+        {% endif %}
+
+        {% if u_id != 1 and not not_found %}
+        <h4 class="text-body-secondary mb-2">You don't have any perfume in store</h4>
+        <p class="text-body-secondary mb-4">Add your first perfume to get started.</p>
+        {% endif %}
+
+        {% if u_id != 1 and not_found %}
+        <h4 class="text-body-secondary mb-2">Sorry we couldn't find that perfume in store</h4>
+        <p class="text-body-secondary mb-4">Please check for an alternative.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</main>
 {% endblock %}

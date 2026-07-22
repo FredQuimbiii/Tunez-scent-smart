@@ -1,0 +1,23 @@
+PERFUME_QUOTES = [
+    "A great fragrance doesn't just sit on the skin, it moves with you through the day, quietly telling your story to everyone you pass.",
+    "Perfume is the one thing you wear that no one can see, yet everyone remembers long after you have left the room.",
+    "There is a certain kind of confidence that comes only from knowing your scent lingers in a room long after you have gone.",
+    "The right fragrance can turn an ordinary morning into a small ritual, a quiet moment of luxury before the world asks anything of you.",
+    "Scent has a way of finding memories we thought were lost, pulling us back to places and people we never expected to feel again.",
+    "A bottle of perfume holds more than notes and oils, it holds the version of yourself you become the moment you wear it.",
+    "Beauty is rarely loud, it is the quiet detail, the trail of fragrance left behind, the small choice that says you took care.",
+    "Every fragrance tells two stories, the one the perfumer intended and the one it becomes once it meets your skin and your day.",
+    "To choose a scent is to choose how you want to be remembered by people who may never remember your face or your name.",
+    "The most elegant thing about a woman is rarely what she says, it is often the fragrance she leaves quietly in her wake.",
+    "A signature scent becomes part of your identity, something people associate with you long before they see you walk into the room.",
+    "There is an art to wearing fragrance well, it should never announce itself, it should simply be discovered by someone standing close enough.",
+    "Perfume does not simply mask or decorate, it reveals something true about the person wearing it, if you know how to listen.",
+    "The best compliment a fragrance can receive is not being noticed immediately, but being missed the moment you walk out of the room.",
+    "Some scents remind us of summer evenings, others of quiet libraries, and the finest fragrances manage to hold both within a single bottle.",
+    "A woman's presence often begins before she speaks, carried gently ahead of her in the fragrance she has chosen to wear that day.",
+    "Fragrance is patient, it does not rush to introduce itself, it simply waits to be noticed by someone paying close enough attention.",
+    "To wear perfume thoughtfully is to understand that beauty is not only seen, it is felt, remembered, and carried quietly in the air.",
+    "A single spray in the morning can carry the memory of an entire season, tucked invisibly into the folds of your clothing.",
+    "The finest perfumes do not compete for attention, they simply exist quietly, confident that they will be remembered without needing to be loud.",
+]
+

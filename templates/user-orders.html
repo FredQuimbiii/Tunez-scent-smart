@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="mb-4">
+        <div class="py-5 text-center">
+            <h1 class="h2">View Orders</h1>
+        </div>
+
+        {% if u_id == 1 %}
+        <div class="d-flex justify-content-end mb-3">
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if date_range == '2weeks' %}Last 2 Weeks
+                    {% elif date_range == '1month' %}Last Month
+                    {% elif date_range == '2months' %}Last 2 Months
+                    {% else %}All Orders
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu navbar-tunez-gradient">
+                    <li><a class="dropdown-item {% if date_range == 'all' %}active{% endif %}"
+                           href="{{ url_for('show_user_orders', u_email=u_mail, range='all') }}">All Orders</a></li>
+                    <li><a class="dropdown-item {% if date_range == '2weeks' %}active{% endif %}"
+                           href="{{ url_for('show_user_orders', u_email=u_mail, range='2weeks') }}">Last 2 Weeks</a></li>
+                    <li><a class="dropdown-item {% if date_range == '1month' %}active{% endif %}"
+                           href="{{ url_for('show_user_orders', u_email=u_mail, range='1month') }}">Last Month</a></li>
+                    <li><a class="dropdown-item {% if date_range == '2months' %}active{% endif %}"
+                           href="{{ url_for('show_user_orders', u_email=u_mail, range='2months') }}">Last 2 Months</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if c_orders and c_orders|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Units</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in c_orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.order_date.strftime('%b %d, %Y | %H:%M') if order.order_date else 'N/A' }}</td>
+                        <td>{{ order.name }}</td>
+                        <td>{{ order.unit }}</td>
+                        <td>₦{{ order.price | commas }}</td>
+                        <td>
+                            {% if u_id == 1 %}
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle
+                                    {% if order.status == 'Pending' %}btn-warning
+                                    {% elif order.status == 'Confirmed' %}btn-info
+                                    {% elif order.status == 'Delivered' %}btn-success
+                                    {% elif order.status == 'Canceled' %}btn-danger
+                                    {% else %}btn-secondary
+                                    {% endif %}"
+                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ order.status }}
+                                </button>
+                                <ul class="dropdown-menu navbar-tunez-gradient">
+                                    <li><a class="dropdown-item" href="{{ url_for('update_order_status', order_id=order.id, new_status='Pending', u_mail=order.email) }}">Pending</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('update_order_status', order_id=order.id, new_status='Confirmed', u_mail=order.email) }}">Confirmed</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('update_order_status', order_id=order.id, new_status='Delivered', u_mail=order.email) }}">Delivered</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('update_order_status', order_id=order.id, new_status='Canceled', u_mail=order.email) }}">Canceled</a></li>
+                                </ul>
+                            </div>
+                            {% else %}
+                            <span class="badge
+                                {% if order.status == 'Pending' %}bg-warning text-dark
+                                {% elif order.status == 'Confirmed' %}bg-info text-dark
+                                {% elif order.status == 'Delivered' %}bg-success
+                                {% elif order.status == 'Canceled' %}bg-danger
+                                {% else %}bg-secondary
+                                {% endif %}">
+                                {{ order.status }}
+                            </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-body-secondary mb-0">There are no orders placed yet{% if date_range != 'all' %} in this time range{% endif %}.</p>
+        </div>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}
