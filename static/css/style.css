@@ -546,6 +546,17 @@
     z-index: 1;
 }
 
+@media (max-width: 767.98px) {
+    .tunez-bg {
+        padding: 12px 0;
+    }
+    .tunez-logo-img {
+        width: auto;
+        max-height: 160px;
+        max-width: 85%;
+    }
+}
+
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -621,7 +632,13 @@
     background-size: contain !important;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 400px;
+    height: 400px;
+}
+
+@media (max-width: 767.98px) {
+    .carousel-bg {
+        height: 240px;
+    }
 }
 
 .golden-bg{
@@ -742,13 +759,14 @@
 
     /* Show the Hot Deals / Best Selling product image on small screens too */
     .perfume-home-page .top-pef-bg {
-    display: block !important;
-    height: 200px;
-    flex: 0 0 100%;
-    max-width: 100%;
-    background-size: contain !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+        display: block !important;
+        height: 200px;
+        min-height: 0 !important;
+        flex: 0 0 100%;
+        max-width: 100%;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 
     .perfume-home-page .pef-card {
