@@ -614,6 +614,29 @@
     h2.display-8 {
         font-size: 1rem;
     }
+
+    .perfume-home-page .pef-card {
+        aspect-ratio: 4 / 3 !important;   /* was 1/1 — shorter than square */
+    }
+
+    .perfume-home-page .my-3.p-2 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+        padding: 0.25rem !important;
+    }
+
+    .perfume-home-page h2.display-8 {
+        font-size: 0.9rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .perfume-home-page .btn.navbar-tunez-gradient {
+        padding: 0.4rem 0.6rem !important;
+        margin-top: 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
 }
 
 .pef-card{

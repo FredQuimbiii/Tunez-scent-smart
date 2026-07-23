@@ -114,9 +114,7 @@
                                 {% if data.units > 0 %}
                                 <a href="{{url_for('show_perfume', pef_id=data.id)}}"
                                    class="btn navbar-tunez-gradient mt-3 w-100">View Product!
-                                    <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
-                                        <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
-                                    </svg>
+                                    <img src="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}" width="20" height="15" alt="">
                                 </a>
                                 {% else %}
                                     {% if data.units < 1 and u_id == 1 %}
