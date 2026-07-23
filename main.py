@@ -30,9 +30,6 @@ import cloudinary.uploader
 import os
 
 app = Flask(__name__)
-s_login = False
-user_pane = False
-
 @app.context_processor
 def inject_cart_count():
     return dict(cart_count=len(basket))
@@ -122,6 +119,8 @@ class PerfumeReviews(db.Model):
 with app.app_context():
     db.create_all()
 
+s_login = False
+user_pane = False
 
 basket = []
 orders = []
@@ -165,7 +164,7 @@ def home():
     categories = request.args.get('category')
     search_form = SearchForm()
 
-    if s_login:
+    if current_user.is_authenticated:
         u_name = current_user.name
         u_id = current_user.id
         u_mail = current_user.email
@@ -322,7 +321,7 @@ def show_perfume(pef_id):
             db.select(PerfumeReviews).filter_by(product_id=pef_id, user_email=current_user.email)
         ).scalar_one_or_none()
 
-    if s_login:
+    if current_user.is_authenticated:
         u_name = current_user.name
         u_mail = current_user.email
         u_id = current_user.id
@@ -415,7 +414,7 @@ def checkout():
     global basket, orders
     form = CheckoutForm()
     total = 0
-    if s_login:
+    if current_user.is_authenticated:
         u_name = current_user.name
         u_id = current_user.id
         u_mail = current_user.email
@@ -508,7 +507,7 @@ def checkout():
 def update_cart(pef_id):
     global basket, orders
     qty = request.args.get('qty', 1, type=int)
-    if s_login:
+    if current_user.is_authenticated:
         pef_to_buy = db.get_or_404(Perfume, pef_id)
         unit = qty
         if len(basket) == 0:
