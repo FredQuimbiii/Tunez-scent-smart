@@ -51,7 +51,7 @@
                     {% for order in c_orders %}
                     <tr>
                         <td>#{{ order.id }}</td>
-                        <td>{{ order.order_date.strftime('%b %d, %Y | %H:%M') if order.order_date else 'N/A' }}</td>
+                        <td>{{ order.order_date.strftime('%b %d, %Y') if order.order_date else 'N/A' }}</td>
                         <td>{{ order.name }}</td>
                         <td>{{ order.unit }}</td>
                         <td>₦{{ order.price | commas }}</td>
