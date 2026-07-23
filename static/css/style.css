@@ -643,10 +643,10 @@
         font-size: 0.85rem !important;
     }
 
-    .perfume-home-page .btn.navbar-tunez-gradient svg {
-        width: 14px !important;
-        height: 14px !important;
-        flex-shrink: 0 !important;
+    .perfume-home-page .btn.navbar-tunez-gradient img {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
     }
 }
 
