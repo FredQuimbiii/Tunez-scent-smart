@@ -271,6 +271,11 @@
     text-align: justify !important;
 }
 
+.description-note{
+    text-align: justify !important;
+    font-size: 0.7rem !important;
+}
+
 .spotify-bg{
     background-image: url("../assets/img/spotify-bg.jpeg") !important;
     background-size: cover;
