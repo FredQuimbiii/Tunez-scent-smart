@@ -32,7 +32,7 @@ import os
 app = Flask(__name__)
 @app.context_processor
 def inject_cart_count():
-    return dict(cart_count=len(basket))
+    return dict(cart_count=len(session.get('basket', [])))
 
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 ckeditor = CKEditor(app)
@@ -122,8 +122,16 @@ with app.app_context():
 s_login = False
 user_pane = False
 
-basket = []
-orders = []
+def get_basket():
+    if 'basket' not in session:
+        session['basket'] = []
+    return session['basket']
+
+
+def get_orders():
+    if 'orders' not in session:
+        session['orders'] = []
+    return session['orders']
 
 
 def num_runs(num=0):
@@ -411,17 +419,16 @@ def add_perfume():
 
 @app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
-    global basket, orders
     form = CheckoutForm()
+    basket = get_basket()
     total = 0
     if current_user.is_authenticated:
-        u_name = current_user.name
         u_id = current_user.id
         u_mail = current_user.email
         product = ""
         for pef in basket:
             total += pef["price"]
-            product += f"{pef["name"]}: {pef['unit']} Unit @ ₦{pef["price"]:,.2f}\n"
+            product += f"{pef['name']}: {pef['unit']} Unit @ ₦{pef['price']:,.2f}\n"
         if form.validate_on_submit():
             # process order using form.first_name.data, form.contact.data, etc.
             message = (
@@ -483,13 +490,12 @@ def checkout():
                     image_url=pef_to_add.image_url,
                     product_id=pef['id'],
                     unit_price=pef["unit_price"]
-
                 )
-
                 db.session.add(new_order)
                 db.session.commit()
-            basket = []
-            orders = []
+
+            session['basket'] = []
+            session['orders'] = []
 
             return redirect(url_for('home'))
         num_cart = len(basket)
@@ -497,7 +503,6 @@ def checkout():
                                logged_in=True, u_id=u_id, cart=basket, num_cart=num_cart,
                                total=total, u_mail=u_mail)
     else:
-        form = CheckoutForm()
         num_cart = len(basket)
         return render_template('checkout.html', form=form, logged_in=False,
                                cart=basket, num_cart=num_cart, total=total, not_user=True, logged_out=True)
@@ -505,9 +510,10 @@ def checkout():
 
 @app.route('/update_cart/<pef_id>')
 def update_cart(pef_id):
-    global basket, orders
     qty = request.args.get('qty', 1, type=int)
     if current_user.is_authenticated:
+        basket = get_basket()
+        orders = get_orders()
         pef_to_buy = db.get_or_404(Perfume, pef_id)
         unit = qty
         if len(basket) == 0:
@@ -520,6 +526,8 @@ def update_cart(pef_id):
             }
             basket.append(cart)
             orders.append(pef_to_buy.id)
+            session['basket'] = basket
+            session['orders'] = orders
         else:
             for pef in basket:
                 if pef['id'] == pef_to_buy.id:
@@ -529,6 +537,7 @@ def update_cart(pef_id):
                     pef["price"] = pef_to_buy.price * unit
                     pef["unit"] = unit
                     pef["unit_price"] = pef_to_buy.price
+                    session['basket'] = basket
                     return redirect(url_for('show_perfume', pef_id=pef_id))
                 elif pef_to_buy.id not in orders:
                     cart = {
@@ -540,18 +549,20 @@ def update_cart(pef_id):
                     }
                     basket.append(cart)
                     orders.append(pef_to_buy.id)
+                    session['basket'] = basket
+                    session['orders'] = orders
                     return redirect(url_for('show_perfume', pef_id=pef_id))
     else:
         flash("You need to login or register to place an order.")
         return redirect(url_for('login'))
     return redirect(url_for('show_perfume', pef_id=pef_id))
 
-
 @app.route('/delete_item/<pef_id>')
 def delete_item(pef_id):
-    global basket, orders
-    basket = [item for item in basket if item["id"] != int(pef_id)]
-    orders = [oid for oid in orders if oid != int(pef_id)]
+    basket = get_basket()
+    orders = get_orders()
+    session['basket'] = [item for item in basket if item["id"] != int(pef_id)]
+    session['orders'] = [oid for oid in orders if oid != int(pef_id)]
     return redirect(url_for('checkout'))
 
 
@@ -899,10 +910,11 @@ def reset_password():
 
 @app.route('/logout')
 def logout():
-    global s_login, basket
+    global s_login
     logout_user()
     s_login = False
-    basket = []
+    session['basket'] = []
+    session['orders'] = []
     return redirect(url_for('home'))
 
 
