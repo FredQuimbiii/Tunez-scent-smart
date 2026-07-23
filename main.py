@@ -30,6 +30,9 @@ import cloudinary.uploader
 import os
 
 app = Flask(__name__)
+s_login = False
+user_pane = False
+
 @app.context_processor
 def inject_cart_count():
     return dict(cart_count=len(basket))
@@ -119,8 +122,6 @@ class PerfumeReviews(db.Model):
 with app.app_context():
     db.create_all()
 
-s_login = False
-user_pane = False
 
 basket = []
 orders = []
