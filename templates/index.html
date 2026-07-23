@@ -114,22 +114,23 @@
                                 {% if data.units > 0 %}
                                 <a href="{{url_for('show_perfume', pef_id=data.id)}}"
                                    class="btn navbar-tunez-gradient mt-3 w-100">View Product!
-                                    <img src="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}" width="20" height="15" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"
+                                         width="14" height="14" alt="" class="ms-1">
                                 </a>
                                 {% else %}
-                                    {% if data.units < 1 and u_id == 1 %}
-                                    <a href="{{url_for('show_perfume', pef_id=data.id)}}"
-                                       class="btn btn-outline-secondary mt-3">Out of Stock!
-                                        <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
-                                            <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
-                                        </svg>
-                                    </a>
-                                    {% else %}
-                                    <button type="button" class="btn btn-outline-secondary mt-3 disabled"
-                                            aria-disabled="true" disabled>
-                                        Out of Stock
-                                    </button>
-                                    {% endif %}
+                                {% if data.units < 1 and u_id == 1 %}
+                                <a href="{{url_for('show_perfume', pef_id=data.id)}}"
+                                   class="btn btn-outline-secondary mt-3">Out of Stock!
+                                    <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
+                                        <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
+                                    </svg>
+                                </a>
+                                {% else %}
+                                <button type="button" class="btn btn-outline-secondary mt-3 disabled"
+                                        aria-disabled="true" disabled>
+                                    Out of Stock
+                                </button>
+                                {% endif %}
                                 {% endif %}
                                 {% if u_id ==1 %}
                                 <a href="{{url_for('delete_perfume', pef_id=data.id) }}">✘</a>
