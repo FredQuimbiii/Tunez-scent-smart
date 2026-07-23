@@ -3,7 +3,7 @@ import resend
 
 resend.api_key = os.environ.get('RESEND_API_KEY')
 
-my_email = "tunezscentmart@gmail.com"
+my_email = "rajiabdulkadir15@gmail.com"
 
 def place_order(message):
     resend.Emails.send({
