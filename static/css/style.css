@@ -638,12 +638,9 @@
         justify-content: center !important;
         gap: 0.35rem !important;
         white-space: nowrap !important;
+        padding: 0.45rem 0.6rem !important;
         margin-top: 0.5rem !important;
-        width: 100%;
-        padding: 16px 0 13px 0 !important;
-        border-radius: 12px;
-        font-size: 14px;
-        line-height: 1em
+        font-size: 0.85rem !important;
     }
 
     .perfume-home-page .btn.navbar-tunez-gradient img {
