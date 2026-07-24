@@ -951,6 +951,19 @@
     }
 }
 
+body {
+    font-family: 'Jost', sans-serif;
+    }
+
+p {
+    font-family: 'Jost', sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
+    }
+
+h1, h2, h3, h4, .display-8 {
+    font-family: 'Playfair Display', serif;
+    }
 
 
 
