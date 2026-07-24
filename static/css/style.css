@@ -202,6 +202,13 @@
     background-repeat: no-repeat;
 }
 
+.pink-dark-bg{
+    background-image: url("../assets/img/pink-dark.jpg") !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .white-bg{
     background-image: url("../assets/img/white_bg.jpg") !important;
     background-size: cover;

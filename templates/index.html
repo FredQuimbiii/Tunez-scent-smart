@@ -46,7 +46,7 @@
             <a href="{{url_for('show_perfume', pef_id=top_pef[0].id)}}" class="text-decoration-none text-reset">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary-emphasis">Hot Deals Today!</strong>
+                        <strong class="d-inline-block mb-2 text-primary-emphasis fst-italic">Hot Deals Today!</strong>
                         <h3 class="mb-0">{{ top_pef[0].name }}</h3>
                         <p class="card-text mb-auto">₦{{ top_pef[0].price | commas }}</p>
                     </div>
@@ -60,7 +60,7 @@
             <a href="{{url_for('show_perfume', pef_id=top_pef[1].id)}}" class="text-decoration-none text-reset">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-success-emphasis">Best Selling!</strong>
+                        <strong class="d-inline-block mb-2 text-success-emphasis fst-italic">Best Selling!</strong>
                         <h3 class="mb-0">{{ top_pef[1].name }}</h3>
                         <p class="mb-auto">₦{{ top_pef[1].price | commas }}</p>
                     </div>
