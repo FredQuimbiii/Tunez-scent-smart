@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, SelectField, RadioField, PasswordField
+from wtforms import StringField, SubmitField, IntegerField, SelectField, RadioField, PasswordField, BooleanField
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import DataRequired, URL, Email, Optional, Length, EqualTo
 from flask_ckeditor import CKEditorField
@@ -29,6 +29,8 @@ class PerfumeForm(FlaskForm):
     image_3 = FileField("Perfume Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
     # description = StringField(label="Description")
     description = CKEditorField("Description", validators=[DataRequired()])
+    discount = BooleanField("On Discount?")
+    discount_amount = IntegerField("Discount Amount (₦)", validators=[Optional()])
     submit = SubmitField("Save Perfume")
 
 class RegisterForm(FlaskForm):

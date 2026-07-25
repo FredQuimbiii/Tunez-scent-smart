@@ -117,9 +117,15 @@
                         {% if user_review %}Update your rating{% else %}Rate this product{% endif %}
                     </button>
 
-                    <p class="pef-price display-6 mb-1" data-aos="zoom-in">
-                        <strong>₦{{ pef.price | commas }}</strong>
+                    {% if pef.discount and pef.discount_price %}
+                    <p class="pef-price display-6 mb-1" data-aos="zoom-in">₦{{ pef.discount_price | commas }}</p>
+                    <p class="pef-price mb-1" data-aos="zoom-in">
+                        <span class="text-decoration-line-through text-body-secondary">₦{{ pef.price | commas }}</span>
+                        <span class="badge bg-danger ms-1">-{{ pef.discount_percent }}%</span>
                     </p>
+                    {% else %}
+                    <p class="pef-price display-6 mb-1" data-aos="zoom-in">₦{{ pef.price | commas }}</p>
+                    {% endif %}
 
                     {% if pef.units > 0 and pef.units < 10 %}
                     <p class="mb-2">
@@ -138,7 +144,7 @@
                         <span class="text-success fw-semibold small">Available</span>
                     </p>
                     <p class="fst-italic" data-aos="zoom-in" style="font-size: 0.6rem;">No free delivery for
-                            locations outside Abuja and Nasarawa</p>
+                        locations outside Abuja and Nasarawa</p>
                     {% endif %}
 
                     <hr class="my-2">
@@ -150,7 +156,8 @@
                                 {{ pef.description |safe }}
                             </p>
                         </div>
-                        <p class="fst-italic" data-aos="zoom-in" style="font-size: 0.8rem;"><strong>No returns after delivery for this
+                        <p class="fst-italic" data-aos="zoom-in" style="font-size: 0.8rem;"><strong>No returns after
+                            delivery for this
                             product.</strong></p>
                     </div>
 
@@ -246,7 +253,15 @@
                     <div class="col p-4 d-flex flex-column position-static">
                         <strong class="d-inline-block mb-2 text-primary-emphasis fst-italic">Hot Deals Today!</strong>
                         <h3 class="mb-0">{{ top_pef[0].name }}</h3>
-                        <p class="card-text mb-auto">₦{{ top_pef[0].price | commas }}</p>
+                        {% if top_pef[0].discount and top_pef[0].discount_price %}
+                        <p class="lead mb-0">₦{{ top_pef[0].discount_price | commas }}</p>
+                        <p class="mb-0">
+                            <span class="text-decoration-line-through text-body-secondary">₦{{ top_pef[0].price | commas }}</span>
+                            <span class="badge bg-danger ms-1">-{{ top_pef[0].discount_percent }}%</span>
+                        </p>
+                        {% else %}
+                        <p class="lead">₦{{ top_pef[0].price | commas }}</p>
+                        {% endif %}
                     </div>
                     <div class="col-6 d-none d-lg-block top-pef-bg"
                          style="background-image: url('{{ top_pef[0].image_url }}');"></div>
@@ -260,7 +275,15 @@
                     <div class="col p-4 d-flex flex-column position-static">
                         <strong class="d-inline-block mb-2 text-success-emphasis fst-italic">Best Selling!</strong>
                         <h3 class="mb-0">{{ top_pef[1].name }}</h3>
-                        <p class="mb-auto">₦{{ top_pef[1].price | commas }}</p>
+                        {% if top_pef[1].discount and top_pef[1].discount_price %}
+                        <p class="lead mb-0">₦{{ top_pef[1].discount_price | commas }}</p>
+                        <p class="mb-0">
+                            <span class="text-decoration-line-through text-body-secondary">₦{{ top_pef[1].price | commas }}</span>
+                            <span class="badge bg-danger ms-1">-{{ top_pef[1].discount_percent }}%</span>
+                        </p>
+                        {% else %}
+                        <p class="lead">₦{{ top_pef[1].price | commas }}</p>
+                        {% endif %}
                     </div>
                     <div class="col-6 d-none d-lg-block top-pef-bg"
                          style="background-image: url('{{ top_pef[1].image_url }}');">

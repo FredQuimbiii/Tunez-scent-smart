@@ -79,6 +79,20 @@ class Perfume(db.Model):
     description = db.Column(db.String(500), nullable=True)
     order_count = db.Column(db.Integer, nullable=True)
     category = db.Column(db.String(100), nullable=True)
+    discount = db.Column(db.Boolean, nullable=True, default=False)
+    discount_amount = db.Column(db.Integer, nullable=True)
+
+    @property
+    def discount_price(self):
+        if self.discount and self.discount_amount:
+            return self.price - self.discount_amount
+        return None
+
+    @property
+    def discount_percent(self):
+        if self.discount and self.discount_amount and self.price:
+            return round((self.discount_amount / self.price) * 100)
+        return None
 
 
 # TODO: Create a User table for all your registered users.
@@ -162,6 +176,7 @@ def admin_only(func):
             return func(*args, **kwargs)
 
     return check
+
 
 @app.route('/', methods=["GET", "POST"])
 def home():
@@ -407,7 +422,9 @@ def add_perfume():
             image_url_3=web_path_3,
             description=form.description.data,
             order_count=0,
-            category=form.category.data
+            category=form.category.data,
+            discount = form.discount.data,
+            discount_amount = form.discount_amount.data if form.discount.data else None
         )
 
         db.session.add(new_perfume)
@@ -516,14 +533,15 @@ def update_cart(pef_id):
         basket = get_basket()
         orders = get_orders()
         pef_to_buy = db.get_or_404(Perfume, pef_id)
+        effective_price = pef_to_buy.discount_price if pef_to_buy.discount and pef_to_buy.discount_price else pef_to_buy.price
         unit = qty
         if len(basket) == 0:
             cart = {
                 "id": pef_to_buy.id,
                 "name": pef_to_buy.name,
-                "price": pef_to_buy.price * unit,
+                "price": effective_price * unit,
                 "unit": unit,
-                "unit_price": pef_to_buy.price
+                "unit_price": effective_price
             }
             basket.append(cart)
             orders.append(pef_to_buy.id)
@@ -535,9 +553,9 @@ def update_cart(pef_id):
                     unit = pef["unit"] + unit
                     pef["id"] = pef_to_buy.id
                     pef["name"] = pef_to_buy.name
-                    pef["price"] = pef_to_buy.price * unit
+                    pef["price"] = effective_price * unit
                     pef["unit"] = unit
-                    pef["unit_price"] = pef_to_buy.price
+                    pef["unit_price"] = effective_price
                     session['basket'] = basket
                     if go_home == "True":
                         return redirect(url_for('home'))
@@ -547,9 +565,9 @@ def update_cart(pef_id):
                     cart = {
                         "id": pef_to_buy.id,
                         "name": pef_to_buy.name,
-                        "price": pef_to_buy.price * unit,
+                        "price": effective_price * unit,
                         "unit": unit,
-                        "unit_price": pef_to_buy.price
+                        "unit_price": effective_price
                     }
                     basket.append(cart)
                     orders.append(pef_to_buy.id)
@@ -684,6 +702,8 @@ def edit_perfume(pef_id):
         units=pef.units,
         description=pef.description,
         category=pef.category,
+        discount=pef.discount,
+        discount_amount=pef.discount_amount,
     )
     if edit_form.validate_on_submit():
         # Only upload + replace if a new file was actually submitted, otherwise keep existing
@@ -701,6 +721,8 @@ def edit_perfume(pef_id):
         pef.description = edit_form.description.data
         pef.order_count = pef.order_count
         pef.category = edit_form.category.data
+        pef.discount = edit_form.discount.data
+        pef.discount_amount = edit_form.discount_amount.data if edit_form.discount.data else None
         db.session.commit()
         return redirect(url_for("show_perfume", pef_id=pef.id))
     return render_template("add-perfume.html", form=edit_form, is_edit=True,
