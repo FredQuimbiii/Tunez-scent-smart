@@ -36,7 +36,7 @@
                 <svg class="bi" width="30" height="30" aria-hidden="true">
                     <use xlink:href="#cart"></use>
                 </svg>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill black-bg mt-1">
+                <span id="cart-count-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill black-bg mt-1">
                     {{ cart_count }}
                     <span class="visually-hidden">items in cart</span>
                 </span>
@@ -217,6 +217,75 @@ if (addToCartBtn && qtyValue) {
         window.location.href = baseUrl + '?qty=' + qty;
     });
 }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.add-to-cart-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const pefId = btn.dataset.pefId;
+                const originalText = btn.innerHTML;
+
+                btn.disabled = true;
+                btn.innerHTML = "Adding...";
+
+                fetch(`/update_cart/${pefId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(res => {
+                    if (res.status === 401) {
+                        return res.json().then(data => {
+                            window.location.href = data.redirect;
+                            throw new Error("redirecting");
+                        });
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        updateCartBadge(data.cart_count);
+                        showCartToast(data.message);
+                    }
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                })
+                .catch(err => {
+                    if (err.message !== "redirecting") {
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                    }
+                });
+            });
+        });
+    });
+
+    function updateCartBadge(count) {
+        const badge = document.getElementById('cart-count-badge');
+        if (badge) {
+            badge.textContent = count;
+            badge.classList.remove('d-none');
+        }
+    }
+
+    function showCartToast(message) {
+        let toast = document.getElementById('cart-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'cart-toast';
+            toast.style.cssText = `
+                position: fixed; bottom: 90px; right: 24px; z-index: 1060;
+                background: #d6336c; color: #fff; padding: 12px 20px;
+                border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+                opacity: 0; transition: opacity 0.3s ease;
+            `;
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.style.opacity = "1";
+        clearTimeout(toast._hideTimer);
+        toast._hideTimer = setTimeout(() => { toast.style.opacity = "0"; }, 2000);
+    }
 </script>
 
 </body>

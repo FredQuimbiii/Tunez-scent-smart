@@ -136,11 +136,12 @@
                                     {% set ns.count = ns.count + 1 %}
                                 </a>
                                 {% if data.units > 0 %}
-                                <a href="{{url_for('update_cart', pef_id=data.id, home=True)}}"
-                                   class="btn navbar-tunez-gradient mt-3 w-100">
-                                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}"
-                                         width="16" height="16" alt="" class="ms-1"> Add to Cart
-                                </a>
+                                <button type="button"
+                                        class="btn navbar-tunez-gradient mt-3 w-100 add-to-cart-btn"
+                                        data-pef-id="{{ data.id }}">
+                                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16"
+                                         height="16" alt="" class="ms-1"> Add to Cart
+                                </button>
                                 {% else %}
                                 {% if data.units < 1 and u_id == 1 %}
                                 <a href="{{url_for('show_perfume', pef_id=data.id)}}"

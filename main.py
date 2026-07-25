@@ -1,4 +1,4 @@
-from flask import Flask, abort, render_template, redirect, url_for, flash, request, session
+from flask import Flask, abort, render_template, redirect, url_for, flash, request, session, jsonify
 from flask_bootstrap import Bootstrap5
 import os
 import smtplib
@@ -525,17 +525,40 @@ def checkout():
                                cart=basket, num_cart=num_cart, total=total, not_user=True, logged_out=True)
 
 
-@app.route('/update_cart/<pef_id>')
+@app.route('/update_cart/<pef_id>', methods=["POST"])
 def update_cart(pef_id):
     qty = request.args.get('qty', 1, type=int)
-    go_home = request.args.get('home')
-    if current_user.is_authenticated:
-        basket = get_basket()
-        orders = get_orders()
-        pef_to_buy = db.get_or_404(Perfume, pef_id)
-        effective_price = pef_to_buy.discount_price if pef_to_buy.discount and pef_to_buy.discount_price else pef_to_buy.price
-        unit = qty
-        if len(basket) == 0:
+
+    if not current_user.is_authenticated:
+        return jsonify({"success": False, "message": "You need to login or register to place an order.", "redirect": url_for('login')}), 401
+
+    basket = get_basket()
+    orders = get_orders()
+    pef_to_buy = db.get_or_404(Perfume, pef_id)
+    effective_price = pef_to_buy.discount_price if pef_to_buy.discount and pef_to_buy.discount_price else pef_to_buy.price
+    unit = qty
+
+    if len(basket) == 0:
+        cart = {
+            "id": pef_to_buy.id,
+            "name": pef_to_buy.name,
+            "price": effective_price * unit,
+            "unit": unit,
+            "unit_price": effective_price
+        }
+        basket.append(cart)
+        orders.append(pef_to_buy.id)
+    else:
+        found = False
+        for pef in basket:
+            if pef['id'] == pef_to_buy.id:
+                unit = pef["unit"] + unit
+                pef["price"] = effective_price * unit
+                pef["unit"] = unit
+                pef["unit_price"] = effective_price
+                found = True
+                break
+        if not found:
             cart = {
                 "id": pef_to_buy.id,
                 "name": pef_to_buy.name,
@@ -545,45 +568,15 @@ def update_cart(pef_id):
             }
             basket.append(cart)
             orders.append(pef_to_buy.id)
-            session['basket'] = basket
-            session['orders'] = orders
-        else:
-            for pef in basket:
-                if pef['id'] == pef_to_buy.id:
-                    unit = pef["unit"] + unit
-                    pef["id"] = pef_to_buy.id
-                    pef["name"] = pef_to_buy.name
-                    pef["price"] = effective_price * unit
-                    pef["unit"] = unit
-                    pef["unit_price"] = effective_price
-                    session['basket'] = basket
-                    if go_home == "True":
-                        return redirect(url_for('home'))
-                    else:
-                        return redirect(url_for('show_perfume', pef_id=pef_id))
-                elif pef_to_buy.id not in orders:
-                    cart = {
-                        "id": pef_to_buy.id,
-                        "name": pef_to_buy.name,
-                        "price": effective_price * unit,
-                        "unit": unit,
-                        "unit_price": effective_price
-                    }
-                    basket.append(cart)
-                    orders.append(pef_to_buy.id)
-                    session['basket'] = basket
-                    session['orders'] = orders
-                    if go_home == "True":
-                        return redirect(url_for('home'))
-                    else:
-                        return redirect(url_for('show_perfume', pef_id=pef_id))
-    else:
-        flash("You need to login or register to place an order.")
-        return redirect(url_for('login'))
-    if go_home == "True":
-        return redirect(url_for('home'))
-    else:
-        return redirect(url_for('show_perfume', pef_id=pef_id))
+
+    session['basket'] = basket
+    session['orders'] = orders
+
+    return jsonify({
+        "success": True,
+        "message": f"{pef_to_buy.name} added to cart!",
+        "cart_count": len(basket)
+    })
 
 @app.route('/delete_item/<pef_id>')
 def delete_item(pef_id):

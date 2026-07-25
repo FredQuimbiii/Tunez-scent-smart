@@ -183,11 +183,12 @@
                 {% if u_id ==1 %}
                 <div class="d-flex flex-wrap gap-2 justify-content-start align-items-center">
                     {% if pef.units > 0 %}
-                    <a href="#" id="addToCartBtn" data-url="{{ url_for('update_cart', pef_id=pef.id) }}"
-                       class="btn navbar-tunez-gradient btn-lg mt-3 my-4 w-100">
-                        <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="25" height="25"/>
-                        Add To Cart
-                    </a>
+                    <button type="button"
+                            class="btn navbar-tunez-gradient mt-3 w-100 add-to-cart-btn"
+                            data-pef-id="{{ pef.id }}">
+                        <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16" height="16" alt=""
+                             class="ms-1"> Add to Cart
+                    </button>
                     {% else %}
                     <button type="button" class="btn btn-outline-secondary btn-lg mt-3 my-4" disabled>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -205,11 +206,12 @@
                 </div>
                 {% else %}
                 {% if pef.units > 0 %}
-                <a href="#" id="addToCartBtn" data-url="{{ url_for('update_cart', pef_id=pef.id) }}"
-                   class="btn navbar-tunez-gradient btn-lg mt-3 my-4 w-100">
-                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="25" height="25"/>
-                    Add To Cart
-                </a>
+                <button type="button"
+                        class="btn navbar-tunez-gradient mt-3 w-100 add-to-cart-btn"
+                        data-pef-id="{{ pef.id }}">
+                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16" height="16" alt=""
+                         class="ms-1"> Add to Cart
+                </button>
                 {% else %}
                 <button type="button" class="btn btn-outline-secondary btn-lg mt-3 my-4 w-100" disabled>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
