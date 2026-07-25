@@ -129,10 +129,10 @@
                                     </div>
 
                                     {% if data.discount and data.discount_price %}
-                                    <p class="lead mb-0">₦{{ data.discount_price | commas }}</p>
-                                    <p class="mb-0">
-                                        <span class="text-decoration-line-through text-body-secondary">₦{{ data.price | commas }}</span>
-                                        <span class="badge bg-danger ms-1">-{{ data.discount_percent }}%</span>
+                                    <p class="lead mb-0">₦{{ data.discount_price | commas }}
+                                        <span class="text-decoration-line-through text-body-secondary"
+                                              style="font-size: 1rem;">₦{{ data.price | commas }}</span>
+                                        <span class="badge bg-danger ms-1" style="font-size: 0.5rem;">-{{ data.discount_percent }}%</span>
                                     </p>
                                     {% else %}
                                     <p class="lead">₦{{ data.price | commas }}</p>
