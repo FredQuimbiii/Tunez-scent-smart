@@ -537,6 +537,7 @@ def update_cart(pef_id):
     pef_to_buy = db.get_or_404(Perfume, pef_id)
     effective_price = pef_to_buy.discount_price if pef_to_buy.discount and pef_to_buy.discount_price else pef_to_buy.price
     unit = qty
+    print(unit)
 
     if len(basket) == 0:
         cart = {

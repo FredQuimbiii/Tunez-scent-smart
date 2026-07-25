@@ -36,7 +36,8 @@
                 <svg class="bi" width="30" height="30" aria-hidden="true">
                     <use xlink:href="#cart"></use>
                 </svg>
-                <span id="cart-count-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill black-bg mt-1">
+                <span id="cart-count-badge"
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill black-bg mt-1">
                     {{ cart_count }}
                     <span class="visually-hidden">items in cart</span>
                 </span>
@@ -193,56 +194,40 @@
                 if (thumbs[e.to]) thumbs[e.to].classList.add('active');
             });
         }
-
-        const qtyValue = document.getElementById('qtyValue');
-        const qtyMinus = document.getElementById('qtyMinus');
-        const qtyPlus = document.getElementById('qtyPlus');
-        if (qtyValue && qtyMinus && qtyPlus) {
-            qtyMinus.addEventListener('click', () => {
-                let val = parseInt(qtyValue.value, 10);
-                if (val > 1) qtyValue.value = val - 1;
-            });
-            qtyPlus.addEventListener('click', () => {
-                let val = parseInt(qtyValue.value, 10);
-                qtyValue.value = val + 1;
-            });
-        }
     })();
-    const addToCartBtn = document.getElementById('addToCartBtn');
-if (addToCartBtn && qtyValue) {
-    addToCartBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const qty = qtyValue.value;
-        const baseUrl = this.dataset.url;
-        window.location.href = baseUrl + '?qty=' + qty;
-    });
-}
 </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
+        // Handle Add to Cart clicks (both home page grid and show-perfume page)
         document.querySelectorAll('.add-to-cart-btn').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 const pefId = btn.dataset.pefId;
                 const originalText = btn.innerHTML;
 
+                // If a quantity selector exists on this page (show-perfume.html), use its value.
+                // On home page grid, this element won't exist, so qty defaults to 1.
+                const qtyInput = document.getElementById('qtyValue');
+                const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+
                 btn.disabled = true;
                 btn.innerHTML = "Adding...";
 
-                fetch(`/update_cart/${pefId}`, {
+                fetch(`/update_cart/${pefId}?qty=${qty}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" }
                 })
-                .then(res => {
+                .then(function (res) {
                     if (res.status === 401) {
-                        return res.json().then(data => {
+                        return res.json().then(function (data) {
                             window.location.href = data.redirect;
                             throw new Error("redirecting");
                         });
                     }
                     return res.json();
                 })
-                .then(data => {
+                .then(function (data) {
                     if (data.success) {
                         updateCartBadge(data.cart_count);
                         showCartToast(data.message);
@@ -250,7 +235,7 @@ if (addToCartBtn && qtyValue) {
                     btn.disabled = false;
                     btn.innerHTML = originalText;
                 })
-                .catch(err => {
+                .catch(function (err) {
                     if (err.message !== "redirecting") {
                         btn.disabled = false;
                         btn.innerHTML = originalText;
@@ -258,6 +243,26 @@ if (addToCartBtn && qtyValue) {
                 });
             });
         });
+
+        // Handle the qty +/- stepper buttons on show-perfume.html
+        const qtyMinus = document.getElementById('qtyMinus');
+        const qtyPlus = document.getElementById('qtyPlus');
+        const qtyValue = document.getElementById('qtyValue');
+
+        if (qtyMinus && qtyPlus && qtyValue) {
+            qtyMinus.addEventListener('click', function () {
+                let current = parseInt(qtyValue.value, 10) || 1;
+                if (current > 1) {
+                    qtyValue.value = current - 1;
+                }
+            });
+
+            qtyPlus.addEventListener('click', function () {
+                let current = parseInt(qtyValue.value, 10) || 1;
+                qtyValue.value = current + 1;
+            });
+        }
+
     });
 
     function updateCartBadge(count) {
@@ -284,7 +289,7 @@ if (addToCartBtn && qtyValue) {
         toast.textContent = message;
         toast.style.opacity = "1";
         clearTimeout(toast._hideTimer);
-        toast._hideTimer = setTimeout(() => { toast.style.opacity = "0"; }, 2000);
+        toast._hideTimer = setTimeout(function () { toast.style.opacity = "0"; }, 2000);
     }
 </script>
 
