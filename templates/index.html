@@ -51,7 +51,7 @@
                         {% if top_pef[0].discount and top_pef[0].discount_price %}
                         <p class="lead mb-0">₦{{ top_pef[0].discount_price | commas }}</p>
                         <p class="mb-0">
-                            <span class="text-decoration-line-through text-body-secondary">₦{{ top_pef[0].price | commas }}</span>
+                            <span class="d-price text-decoration-line-through text-body-secondary">₦{{ top_pef[0].price | commas }}</span>
                             <span class="badge bg-danger ms-1">-{{ top_pef[0].discount_percent }}%</span>
                         </p>
                         {% else %}
@@ -73,7 +73,7 @@
                         {% if top_pef[1].discount and top_pef[1].discount_price %}
                         <p class="lead mb-0">₦{{ top_pef[1].discount_price | commas }}</p>
                         <p class="mb-0">
-                            <span class="text-decoration-line-through text-body-secondary">₦{{ top_pef[1].price | commas }}</span>
+                            <span class="d-price text-decoration-line-through text-body-secondary">₦{{ top_pef[1].price | commas }}</span>
                             <span class="badge bg-danger ms-1">-{{ top_pef[1].discount_percent }}%</span>
                         </p>
                         {% else %}
@@ -130,6 +130,8 @@
 
                                     {% if data.discount and data.discount_price %}
                                     <p class="lead mb-0">₦{{ data.discount_price | commas }}
+                                    </p>
+                                    <p class="mb-0">
                                         <span class="d-price text-decoration-line-through text-body-secondary"
                                               style="font-size: 1rem;">₦{{ data.price | commas }}</span>
                                         <span class="badge bg-danger ms-1" style="font-size: 0.5rem;">-{{ data.discount_percent }}%</span>
