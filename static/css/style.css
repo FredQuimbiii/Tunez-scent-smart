@@ -967,6 +967,13 @@
         width: 14px !important;
         height: 14px !important;
     }
+
+    .perfume-home-page .rate-star {
+        width: 10px !important;
+        height: 10px !important;
+        font-size: 0.7rem !important;
+        margin-bottom: 0 !important;
+    }
 }
 
 body {
