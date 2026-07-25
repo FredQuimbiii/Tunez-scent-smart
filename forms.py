@@ -66,14 +66,51 @@ class CheckoutForm(FlaskForm):
     country = SelectField('Country', validators=[DataRequired()],
                            choices=[('', 'Choose...'),
                                     ('Nigeria', 'Nigeria'),
-                                    ('USA', 'USA')
+                                    ('USA', 'USA'),
+                                    ('UK', 'UK'),
+                                    ('Others', 'Others')
                                     ]
                           )
     state = SelectField('State', validators=[DataRequired()],
-                         choices=[('', 'Choose...'),
-                                  ('FCT', 'FCT - Abuja'),
-                                  ('Nasarawa', 'Nasarawa')
-                                  ]
+                        choices=[('', 'Choose...'),
+                                 ('FCT', 'FCT - Abuja'),
+                                 ('Abia', 'Abia'),
+                                 ('Adamawa', 'Adamawa'),
+                                 ('Akwa Ibom', 'Akwa Ibom'),
+                                 ('Anambra', 'Anambra'),
+                                 ('Bauchi', 'Bauchi'),
+                                 ('Bayelsa', 'Bayelsa'),
+                                 ('Benue', 'Benue'),
+                                 ('Borno', 'Borno'),
+                                 ('Cross River', 'Cross River'),
+                                 ('Delta', 'Delta'),
+                                 ('Ebonyi', 'Ebonyi'),
+                                 ('Edo', 'Edo'),
+                                 ('Ekiti', 'Ekiti'),
+                                 ('Enugu', 'Enugu'),
+                                 ('Gombe', 'Gombe'),
+                                 ('Imo', 'Imo'),
+                                 ('Jigawa', 'Jigawa'),
+                                 ('Kaduna', 'Kaduna'),
+                                 ('Kano', 'Kano'),
+                                 ('Katsina', 'Katsina'),
+                                 ('Kebbi', 'Kebbi'),
+                                 ('Kogi', 'Kogi'),
+                                 ('Kwara', 'Kwara'),
+                                 ('Lagos', 'Lagos'),
+                                 ('Nasarawa', 'Nasarawa'),
+                                 ('Niger', 'Niger'),
+                                 ('Ogun', 'Ogun'),
+                                 ('Ondo', 'Ondo'),
+                                 ('Osun', 'Osun'),
+                                 ('Oyo', 'Oyo'),
+                                 ('Plateau', 'Plateau'),
+                                 ('Rivers', 'Rivers'),
+                                 ('Sokoto', 'Sokoto'),
+                                 ('Taraba', 'Taraba'),
+                                 ('Yobe', 'Yobe'),
+                                 ('Zamfara', 'Zamfara')
+                                 ]
                         )
     zip_code = StringField('Zip', validators=[Optional(), Length(max=10)])
     payment_method = RadioField(

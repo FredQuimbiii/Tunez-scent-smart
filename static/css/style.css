@@ -644,6 +644,13 @@
         text-overflow: ellipsis;
     }
 
+    .orders-text {
+        font-size: 0.8rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .perfume-home-page .btn.navbar-tunez-gradient {
         display: inline-flex !important;
         align-items: center !important;
@@ -858,6 +865,12 @@
     }
     .perfume-home-page .lead {
         margin-bottom: -10px !important;
+    }
+    .orders-text {
+        font-size: 0.8rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
