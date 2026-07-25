@@ -135,7 +135,7 @@
                                         <span class="badge bg-danger ms-1" style="font-size: 0.7rem;">-{{ data.discount_percent }}%</span>
                                     </p>
                                     {% else %}
-                                    <p class="lead">₦{{ data.price | commas }}</p>
+                                    <p class="lead mb-0">₦{{ data.price | commas }}</p>
                                     {% endif %}
                                     {% set ns.serv = ns.serv + [data.name] %}
                                     {% set ns.count = ns.count + 1 %}
