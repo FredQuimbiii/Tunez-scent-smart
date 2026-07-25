@@ -512,7 +512,6 @@ def checkout():
 def update_cart(pef_id):
     qty = request.args.get('qty', 1, type=int)
     go_home = request.args.get('home')
-    print(go_home)
     if current_user.is_authenticated:
         basket = get_basket()
         orders = get_orders()
@@ -533,7 +532,7 @@ def update_cart(pef_id):
         else:
             for pef in basket:
                 if pef['id'] == pef_to_buy.id:
-                    unit = pef["unit"] + 1
+                    unit = pef["unit"] + unit
                     pef["id"] = pef_to_buy.id
                     pef["name"] = pef_to_buy.name
                     pef["price"] = pef_to_buy.price * unit
