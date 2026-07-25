@@ -91,7 +91,7 @@
 
         <div class="outlines-bg row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative p-4">
             <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-start overflow-hidden">
-                <div class="my-3 p-3">
+                <div class="my-3 p-3 mb-0">
                     <h2 class="display-7" data-aos="zoom-in"><strong>{{ pef.name }}</strong></h2>
                     <p>Brand: {{ pef.brand }} | Similar products from {{ pef.brand }}</p>
 
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="text-start mt-3">
-                        <h6 class="fw-bold mb-2">Tags</h6>
+                        <h6 class="fw-bold mb-0">Tags</h6>
                         <a href="#"
                            class="badge bg-secondary-subtle text-secondary-emphasis text-decoration-none border border-secondary-subtle">
                             {{ pef.brand }}
@@ -184,7 +184,7 @@
                 <div class="d-flex flex-wrap gap-2 justify-content-start align-items-center">
                     {% if pef.units > 0 %}
                     <button type="button"
-                            class="btn navbar-tunez-gradient mt-3 w-100 add-to-cart-btn"
+                            class="btn navbar-tunez-gradient mb-3 w-100 add-to-cart-btn"
                             data-pef-id="{{ pef.id }}">
                         <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16" height="16" alt=""
                              class="ms-1"> Add to Cart
@@ -207,7 +207,7 @@
                 {% else %}
                 {% if pef.units > 0 %}
                 <button type="button"
-                        class="btn navbar-tunez-gradient mt-3 w-100 add-to-cart-btn"
+                        class="btn navbar-tunez-gradient mb-3 w-100 add-to-cart-btn"
                         data-pef-id="{{ pef.id }}">
                     <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16" height="16" alt=""
                          class="ms-1"> Add to Cart
