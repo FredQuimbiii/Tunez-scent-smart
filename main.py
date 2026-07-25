@@ -562,7 +562,10 @@ def update_cart(pef_id):
     else:
         flash("You need to login or register to place an order.")
         return redirect(url_for('login'))
-    return redirect(url_for('show_perfume', pef_id=pef_id))
+    if go_home == "True":
+        return redirect(url_for('home'))
+    else:
+        return redirect(url_for('show_perfume', pef_id=pef_id))
 
 @app.route('/delete_item/<pef_id>')
 def delete_item(pef_id):
