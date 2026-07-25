@@ -839,6 +839,12 @@
     .perfume-home-page .lead {
         font-size: 0.9rem !important;
     }
+    .perfume-home-page .badge {
+        font-size: 0.4rem !important;
+    }
+     .perfume-home-page .d-price {
+        font-size: 0.6rem !important;
+    }
     .perfume-home-page .btn {
         font-size: 0.8rem !important;
         padding: 0.4rem 0.5rem !important;
