@@ -511,6 +511,8 @@ def checkout():
 @app.route('/update_cart/<pef_id>')
 def update_cart(pef_id):
     qty = request.args.get('qty', 1, type=int)
+    go_home = request.args.get('home')
+    print(go_home)
     if current_user.is_authenticated:
         basket = get_basket()
         orders = get_orders()
@@ -538,7 +540,10 @@ def update_cart(pef_id):
                     pef["unit"] = unit
                     pef["unit_price"] = pef_to_buy.price
                     session['basket'] = basket
-                    return redirect(url_for('show_perfume', pef_id=pef_id))
+                    if go_home == "True":
+                        return redirect(url_for('home'))
+                    else:
+                        return redirect(url_for('show_perfume', pef_id=pef_id))
                 elif pef_to_buy.id not in orders:
                     cart = {
                         "id": pef_to_buy.id,
@@ -551,7 +556,10 @@ def update_cart(pef_id):
                     orders.append(pef_to_buy.id)
                     session['basket'] = basket
                     session['orders'] = orders
-                    return redirect(url_for('show_perfume', pef_id=pef_id))
+                    if go_home == "True":
+                        return redirect(url_for('home'))
+                    else:
+                        return redirect(url_for('show_perfume', pef_id=pef_id))
     else:
         flash("You need to login or register to place an order.")
         return redirect(url_for('login'))

@@ -85,37 +85,41 @@
                     <div class="outlines-bg row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative p-4 me-md-3">
                         <div class="white-bg me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden d-flex flex-column"
                              data-aos="fade-up">
-                            <div class="pef-card shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius:
+                            <a href="{{url_for('show_perfume', pef_id=data.id)}}"
+                               class="pef-card shadow-sm mx-auto mt-auto" style="width: 100%; height: 400px; border-radius:
                                             21px 21px 0 0; background-image: url('{{ data.image_url }}');"
                                  data-aos="fade-up">
-                            </div>
+                            </a>
                             <div class="my-3 p-2">
-                                <h2 class="display-8" style="font-size: 1.5rem;">{{ data.name }}</h2>
-
-                                {% set r = pef_ratings.get(data.id, {"avg": 0, "count": 0}) %}
-                                <div class="d-flex justify-content-center gap-1 mb-1">
-                                    {% for i in range(1, 6) %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
-                                         class="{{ 'text-warning' if i <= r.avg else 'text-secondary opacity-50' }}"
-                                         viewBox="0 0 16 16">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                    </svg>
-                                    {% endfor %}
-                                    <span class="small text-body-secondary ms-1">
-                                        {% if r.count > 0 %}
-                                        {{ "%.1f"|format(r.avg) }}
-                                        {% endif %}
-                                    </span>
-                                </div>
-
-                                <p class="lead">₦{{ data.price | commas}}</p>
-                                {% set ns.serv = ns.serv + [data.name] %}
-                                {% set ns.count = ns.count + 1 %}
-                                {% if data.units > 0 %}
                                 <a href="{{url_for('show_perfume', pef_id=data.id)}}"
-                                   class="btn navbar-tunez-gradient mt-3 w-100">View Product!
-                                    <img src="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"
-                                         width="14" height="14" alt="" class="ms-1">
+                                    class="link-body-emphasis text-decoration-none">
+                                    <h2 class="display-8" style="font-size: 1.5rem;">{{ data.name }}</h2>
+
+                                    {% set r = pef_ratings.get(data.id, {"avg": 0, "count": 0}) %}
+                                    <div class="d-flex justify-content-center gap-1 mb-1">
+                                        {% for i in range(1, 6) %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                             class="{{ 'text-warning' if i <= r.avg else 'text-secondary opacity-50' }}"
+                                             viewBox="0 0 16 16">
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>
+                                        {% endfor %}
+                                        <span class="small text-body-secondary ms-1">
+                                            {% if r.count > 0 %}
+                                            {{ "%.1f"|format(r.avg) }}
+                                            {% endif %}
+                                        </span>
+                                    </div>
+
+                                    <p class="lead">₦{{ data.price | commas}}</p>
+                                    {% set ns.serv = ns.serv + [data.name] %}
+                                    {% set ns.count = ns.count + 1 %}
+                                </a>
+                                {% if data.units > 0 %}
+                                <a href="{{url_for('update_cart', pef_id=data.id, home=True)}}"
+                                   class="btn navbar-tunez-gradient mt-3 w-100">
+                                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}"
+                                         width="16" height="16" alt="" class="ms-1">   Add to Cart
                                 </a>
                                 {% else %}
                                 {% if data.units < 1 and u_id == 1 %}
