@@ -293,6 +293,19 @@
     }
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageZoomModal = document.getElementById('imageZoomModal');
+        if (imageZoomModal) {
+            imageZoomModal.addEventListener('show.bs.modal', function (event) {
+                const triggerImg = event.relatedTarget;
+                const fullSrc = triggerImg.getAttribute('data-full-src');
+                document.getElementById('zoomedImage').setAttribute('src', fullSrc);
+            });
+        }
+    });
+</script>
+
 </body>
 {% block footer %}
 {% include "footer.html" %}
