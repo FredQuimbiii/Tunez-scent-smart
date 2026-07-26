@@ -530,7 +530,8 @@ def update_cart(pef_id):
     qty = request.args.get('qty', 1, type=int)
 
     if not current_user.is_authenticated:
-        return jsonify({"success": False, "message": "You need to login or register to place an order.", "redirect": url_for('login')}), 401
+        flash("You need to login or register to place an order.")
+        return jsonify({"success": False, "redirect": url_for('login')}), 401
 
     basket = get_basket()
     orders = get_orders()
