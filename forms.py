@@ -23,7 +23,7 @@ class PerfumeForm(FlaskForm):
                                    ],
                            default="General"
                           )
-    units = IntegerField("Number of Units", validators=[DataRequired()])
+    units = IntegerField("Number of Units")
     image = FileField("Perfume Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
     image_2 = FileField("Perfume Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])
     image_3 = FileField("Perfume Image", validators=[FileAllowed(['jpg', 'jpeg', 'png'], 'Images only!')])

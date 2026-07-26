@@ -146,13 +146,14 @@
                                 {% if data.units < 1 and u_id == 1 %}
                                 <a href="{{url_for('show_perfume', pef_id=data.id)}}"
                                    class="btn btn-outline-secondary mt-3">Out of Stock!
-                                    <svg class="bi ms-1" width="20" height="15" aria-hidden="true">
-                                        <use xlink:href="{{ url_for('static', filename='assets/img/mono-rotation-cw.svg') }}"></use>
-                                    </svg>
+                                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16"
+                                         height="16" alt="" class="ms-1">
                                 </a>
                                 {% else %}
                                 <button type="button" class="btn btn-outline-secondary mt-3 disabled"
                                         aria-disabled="true" disabled>
+                                    <img src="{{ url_for('static', filename='assets/img/cart.svg') }}" width="16"
+                                         height="16" alt="" class="ms-1">
                                     Out of Stock
                                 </button>
                                 {% endif %}

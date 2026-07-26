@@ -72,7 +72,7 @@ class Perfume(db.Model):
     name = db.Column(db.String(250), nullable=False)
     brand = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    units = db.Column(db.Integer, nullable=False)
+    units = db.Column(db.Integer, nullable=True)
     image_url = db.Column(db.String(300), nullable=False)
     image_url_2 = db.Column(db.String(300), nullable=True)
     image_url_3 = db.Column(db.String(300), nullable=True)
