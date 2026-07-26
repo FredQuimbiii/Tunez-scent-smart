@@ -94,8 +94,12 @@
     <div class="container-fluid filter">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb small">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}"
+                                               class="text-decoration-none text-body-secondary">All</a>
+                </li>
                 <li class="breadcrumb-item"><a href="{{ url_for('home', latest='products') }}"
-                                               class="text-decoration-none text-body-secondary">Newest</a></li>
+                                               class="text-decoration-none text-body-secondary">Newest</a>
+                </li>
                 <li class="breadcrumb-item"><a href="{{ url_for('home', most_liked='products') }}"
                                                class="text-decoration-none text-body-secondary">Most Viewed</a></li>
                 <li class="breadcrumb-item"><a href="{{ url_for('home', best='products') }}"

@@ -1010,8 +1010,14 @@ h1, h2, h3, h4, .display-8 {
     margin-bottom: -10px !important;
 }
 
-.pages{
-    background-color: #2C2C2C !important;
+.pagination .page-item.active .page-link {
+    background-color: #57595B !important;
+    border-color: #2C2C2C !important;
+    color: #F9F8F6 !important;
+}
+
+.page-link{
+    color: #2C2C2C !important;
 }
 
 .breadcrumb {
