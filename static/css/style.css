@@ -742,6 +742,7 @@
 
 .pef-price{
     justify-content: left !important;
+    font-weight: 500 !important;
 }
 
 .pef-name{
@@ -1004,5 +1005,22 @@ h1, h2, h3, h4, .display-8 {
     font-family: 'Playfair Display', serif;
     }
 
+.filter{
+    margin-top: -10px !important;
+    margin-bottom: -10px !important;
+}
+
+.pages{
+    background-color: #2C2C2C !important;
+}
+
+.breadcrumb {
+    font-weight: 1000 !important;
+    font-family: 'Jost', sans-serif !important;
+}
+
+.lead {
+    font-weight: 400 !important;
+}
 
 

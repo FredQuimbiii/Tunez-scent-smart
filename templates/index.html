@@ -41,7 +41,7 @@
                 class="carousel-control-next-icon" aria-hidden="true"></span> <span
                 class="visually-hidden">Next</span></button>
     </div>
-    <div class="row mb-2" data-aos="fade-down">
+    <div class="row" data-aos="fade-down">
         <div class="col-md-6">
             <a href="{{url_for('show_perfume', pef_id=top_pef[0].id)}}" class="text-decoration-none text-reset">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -63,6 +63,7 @@
                 </div>
             </a>
         </div>
+
         {% if top_pef|length > 1 %}
         <div class="col-md-6" data-aos="fade-down">
             <a href="{{url_for('show_perfume', pef_id=top_pef[1].id)}}" class="text-decoration-none text-reset">
@@ -89,6 +90,20 @@
         </div>
         {% endif %}
     </div>
+
+    <div class="container-fluid filter">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb small">
+                <li class="breadcrumb-item"><a href="{{ url_for('home', latest='products') }}"
+                                               class="text-decoration-none text-body-secondary">Newest</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('home', most_liked='products') }}"
+                                               class="text-decoration-none text-body-secondary">Most Viewed</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('home', best='products') }}"
+                                               class="text-decoration-none text-body-secondary">High-end</a></li>
+            </ol>
+        </nav>
+    </div>
+
     <div class="row g-5">
         <div class="col-md-8">
             <article class="blog-post">

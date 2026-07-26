@@ -183,6 +183,9 @@ def home():
     searched = False
     not_found = False
     page = request.args.get('page', 1, type=int)
+    latest = request.args.get('latest')
+    most_liked = request.args.get('most_liked')
+    best = request.args.get('best')
     per_page = 14
     categories = request.args.get('category')
     search_form = SearchForm()
@@ -208,6 +211,18 @@ def home():
             searched = True
             query = query.filter(Perfume.category == categories)
 
+        if latest:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.id.desc())
+
+        if most_liked:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.order_count.desc())
+
+        if best:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.price.desc())
+
         pagination = db.paginate(
             query,
             page=page,
@@ -232,11 +247,6 @@ def home():
                 avg = 0
                 count = 0
             pef_ratings[data.id] = {"avg": avg, "count": count}
-
-        pef_img = []
-        for data in perfumes:
-            pef_img.append(data.image_url)
-        random.shuffle(pef_img)
 
         result_2 = db.session.execute(db.select(Perfume).order_by(Perfume.order_count.desc()))
         best_pefs = result_2.scalars().all()
@@ -268,6 +278,18 @@ def home():
             searched = True
             query = query.filter(Perfume.category == categories)
 
+        if latest:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.id.desc())
+
+        if most_liked:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.order_count.desc())
+
+        if best:
+            searched = True
+            query = db.select(Perfume).order_by(Perfume.price.desc())
+
         pagination = db.paginate(
 
             query,
@@ -299,11 +321,6 @@ def home():
                 avg = 0
                 count = 0
             pef_ratings[data.id] = {"avg": avg, "count": count}
-
-        pef_img = []
-        for data in perfumes:
-            pef_img.append(data.image_url)
-        random.shuffle(pef_img)
 
         result_2 = db.session.execute(db.select(Perfume).order_by(Perfume.order_count.desc()))
         best_pefs = result_2.scalars().all()
