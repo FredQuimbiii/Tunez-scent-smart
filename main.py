@@ -187,6 +187,12 @@ def home():
     categories = request.args.get('category')
     search_form = SearchForm()
 
+    images = db.session.execute(db.select(Perfume)).scalars().all()
+    perfume_img = []
+    for data in images:
+        perfume_img.append(data.image_url)
+    random.shuffle(perfume_img)
+
     if current_user.is_authenticated:
         u_name = current_user.name
         u_id = current_user.id
@@ -244,7 +250,7 @@ def home():
                 recent_pef.append(pef.product_id)
         quote = random.choice(PERFUME_QUOTES)
         return render_template("index.html", pef=perfumes,
-                               count=num_runs(), num_pef=num_pef, pef_img=pef_img,
+                               count=num_runs(), num_pef=num_pef, pef_img=perfume_img,
                                top_pef=best_pefs, quote=quote, logged_in=True, u_id=u_id, u_mail=u_mail,
                                pagination=pagination, hot_pef=recent_od, search_form=search_form, is_home=True,
                                not_found=not_found, pef_ratings=pef_ratings)
@@ -312,7 +318,7 @@ def home():
 
         quote = random.choice(PERFUME_QUOTES)
         return render_template("index.html", pef=perfumes,
-                               count=num_runs(), num_pef=num_pef, pef_img=pef_img,
+                               count=num_runs(), num_pef=num_pef, pef_img=perfume_img,
                                top_pef=best_pefs, quote=quote, logged_out=True, not_user=True,
                                pagination=pagination, hot_pef=recent_od, search_form=search_form,
                                is_home=True, not_found=not_found, pef_ratings=pef_ratings)
