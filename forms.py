@@ -20,6 +20,8 @@ class PerfumeForm(FlaskForm):
                                    ('Corporate', 'Corporate'),
                                    ('Arabian', 'Arabian'),
                                    ('Diffusers', 'Diffusers'),
+                                   ('Sprays', 'Sprays'),
+                                   ('Air Fresheners', 'Air Fresheners'),
                                    ],
                            default="General"
                           )
